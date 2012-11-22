@@ -40,7 +40,7 @@ class Gpio {
         // Add to exported pins array
         $exportedPins[] = $pinNo;
 
-        return this;
+        return $this;
     }
 
     public function input($pinNo) {
@@ -118,7 +118,7 @@ class Gpio {
         if(!is_string($direction) || empty($direction)) {
             throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (string expected).', $direction));
         }
-        if (!in_array($pinNo, $this->directions)) {
+        if (!in_array($direction, $this->directions)) {
             throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (unknown direction).', $direction));
         }
 

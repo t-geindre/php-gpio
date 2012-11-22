@@ -2,7 +2,7 @@
     "name": "ronanguilloux/php-gpio",
     "type": "library",
     "description": "GPIO-related utils & toolkit PHP library",
-    "keywords": ["GPIO", "hardware", "chipset", "input/output", "port", "pin", "chip", "sensors", "raspberry", "raspberry pi"],
+    "keywords": ["GPIO", "hardware", "chipset", "input", "output", "port", "pin", "chip", "sensors", "raspberry", "raspberry pi"],
     "homepage": "https://github.com/ronanguilloux/php-gpio",
     "license": "MIT",
     "authors": [

@@ -1,18 +1,18 @@
-PhpGpio
-=======
+php-gpio
+=======-
 
 
-**PhpGpio** is a simple PHP library to alloww access to the GPIO on the Raspberry Pi.
+**php-gpio** is a simple PHP library to allow access to the GPIO on the Raspberry Pi.
 
 It provides simple tools such as reading & writing to pins
 
-[![Build Status](https://secure.travis-ci.org/ronanguilloux/PhpGpio.png?branch=master)](http://travis-ci.org/ronanguilloux/PhpGpio)
+[![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio)
 
 
 Installation
 ------------
 
-The recommended way to install PhpGpio is through [composer](http://getcomposer.org).
+The recommended way to install php-gpio is through [composer](http://getcomposer.org).
 
 Just create a `composer.json` file for your project:
 
@@ -20,7 +20,7 @@ Just create a `composer.json` file for your project:
 {
      "require": {
         "php": ">=5.3.0",
-        "ronanguilloux/PhpGpio": "master-dev"
+        "ronanguilloux/php-gpio": "master-dev"
     }
 }
 ```
@@ -91,11 +91,11 @@ Credits
 
 * Aaron Pearce, for its [forked pickley/PHP-GPIO project](https://github.com/pickley/PHP-GPIO)
 * Ronan Guilloux <ronan.guilloux@gmail.com>
-* [All contributors](https://github.com/ronanguilloux/PhpGpio/contributors)
+* [All contributors](https://github.com/ronanguilloux/php-gpio/contributors)
 
 
 License
 -------
 
-PhpGpio is released under the MIT License. See the bundled LICENSE file for details.
-You can find a copy of this software here: https://github.com/ronanguilloux/PhpGpio
+**php-gpio** is released under the MIT License. See the bundled LICENSE file for details.
+You can find a copy of this software here: https://github.com/ronanguilloux/php-gpio

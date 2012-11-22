@@ -41,7 +41,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException PHPUnit_Framework_Error_Notice
      */
     public function testSetupWithGoodPinAndWrongDirection()
     {
@@ -57,7 +57,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testSetupWithMissingArguments()
     {

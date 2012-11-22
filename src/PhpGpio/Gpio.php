@@ -20,7 +20,7 @@ class Gpio {
 
     // Setup pin, takes pin number and direction (in or out)
     public function setup($pinNo, $direction) {
-        if(!$this->isValidePin($pinNo)) {
+        if(!$this->isValidPin($pinNo)) {
             return false;
         }
 
@@ -44,7 +44,7 @@ class Gpio {
     }
 
     public function input($pinNo) {
-        if(!$this->isValidePin($pinNo)) {
+        if(!$this->isValidPin($pinNo)) {
             return false;
         }
         if($this->isExported($pinNo)) {
@@ -58,7 +58,7 @@ class Gpio {
 
     // Value == 1 or 0, where 1 = on, 0 = off
     public function output($pinNo, $value) {
-        if(!$this->isValidePin($pinNo)) {
+        if(!$this->isValidPin($pinNo)) {
             return false;
         }
         if(empty($value)) {
@@ -77,7 +77,7 @@ class Gpio {
     }
 
     public function unexport($pinNo) {
-        if(!$this->isValidePin($pinNo)) {
+        if(!$this->isValidPin($pinNo)) {
             return false;
         }
        if($this->isExported($pinNo)) {
@@ -97,7 +97,7 @@ class Gpio {
 
     // Check if exported
     public function isExported($pinNo) {
-        if(!$this->isValidePin($pinNo)) {
+        if(!$this->isValidPin($pinNo)) {
             return false;
         }
 
@@ -105,7 +105,7 @@ class Gpio {
     }
 
     public function currentDirection($pinNo) {
-        if(!$this->isValidePin($pinNo))
+        if(!$this->isValidPin($pinNo))
         {
             return false;
         }

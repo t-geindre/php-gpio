@@ -2,7 +2,7 @@ PhpGpio
 =======
 
 
-** PhpGpio** is a simple PHP library to alloww access to the GPIO on the Raspberry Pi.
+**PhpGpio** is a simple PHP library to alloww access to the GPIO on the Raspberry Pi.
 
 It provides simple tools such as reading & writing to pins
 
@@ -93,7 +93,7 @@ $ phpunit
 Credits
 -------
 
-* Aaron Pearce, for the forked pickley/PHP-GPIO project
+* Aaron Pearce, for its [forked pickley/PHP-GPIO project](https://github.com/pickley/PHP-GPIO)
 * Ronan Guilloux <ronan.guilloux@gmail.com>
 * [All contributors](https://github.com/ronanguilloux/PhpGpio/contributors)
 

@@ -17,6 +17,15 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
+     * a valid test
+     */
+    public function testSetupWithRightParamters()
+    {
+	$result = $this->gpio->setup(17, 'out');
+	$this->assertTrue($result instanceof Gpio);
+    }
+
+    /**
      * @expectedException InvalidArgumentException
      */
     public function testSetupWithNegativePinAndGoodDirection()
@@ -41,7 +50,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Notice
+     * @expectedException InvalidArgumentException
      */
     public function testSetupWithGoodPinAndWrongDirection()
     {

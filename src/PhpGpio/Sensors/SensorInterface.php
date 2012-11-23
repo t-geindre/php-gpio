@@ -33,4 +33,3 @@ interface SensorInterface
     public function write($args = array());
 
 }
-

@@ -22,13 +22,12 @@ class Gpio
     // exported pins for when we unexport all
     private $exportedPins = array();
 
-
     /**
      * Setup pin, takes pin number and direction (in or out)
      *
-     * @param  int  $pinNo
-     * @param  string  $direction
-     * @return mixed string GPIO value or boolean false
+     * @param  int    $pinNo
+     * @param  string $direction
+     * @return mixed  string GPIO value or boolean false
      */
     public function setup($pinNo, $direction)
     {
@@ -58,7 +57,7 @@ class Gpio
     /**
      * Get input value
      *
-     * @param  int  $pinNo
+     * @param  int   $pinNo
      * @return mixed string GPIO value or boolean false
      */
     public function input($pinNo)
@@ -79,9 +78,9 @@ class Gpio
     /**
      * Set output value
      *
-     * @param  int  $pinNo
-     * @param  string  $value
-     * @return mixed Gpio current instance or boolean false
+     * @param  int    $pinNo
+     * @param  string $value
+     * @return mixed  Gpio current instance or boolean false
      */
     public function output($pinNo, $value)
     {
@@ -105,7 +104,7 @@ class Gpio
     /**
      * Unexport Pin
      *
-     * @param  int  $pinNo
+     * @param  int   $pinNo
      * @return mixed Gpio current instance or boolean false
      */
     public function unexport($pinNo)

@@ -10,6 +10,7 @@ use PhpGpio\Gpio;
 class GpioTest extends \PhpUnit_Framework_TestCase
 {
     private $gpio;
+    private $rpi ='raspberrypi';
 
     public function setUp()
     {
@@ -17,12 +18,24 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
+     * @outputBuffering enabled
+     */
+    public function assertPreconditionOrMarkTestSkipped()
+    {
+        if ($this->rpi !== $nodename = exec('uname --nodename')) {
+            $warning = sprintf(" Precondition is not met : %s is not a %s machine! ", $nodename, $this->rpi);
+            $this->markTestSkipped($warning);
+        }
+    }
+
+    /**
      * a valid test
      */
     public function testSetupWithRightParamters()
     {
-	$result = $this->gpio->setup(17, 'out');
-	$this->assertTrue($result instanceof Gpio);
+        $this->assertPreconditionOrMarkTestSkipped();
+        $result = $this->gpio->setup(17, 'out');
+        $this->assertTrue($result instanceof Gpio);
     }
 
     /**
@@ -30,8 +43,8 @@ class GpioTest extends \PhpUnit_Framework_TestCase
      */
     public function testOutPutWithRightParametersOn()
     {
-	$result = $this->gpio->output(17, 1);
-	$this->assertTrue($result instanceof Gpio);
+        $result = $this->gpio->output(17, 1);
+        $this->assertTrue($result instanceof Gpio);
     }
 
     /**
@@ -39,9 +52,9 @@ class GpioTest extends \PhpUnit_Framework_TestCase
      */
     public function testOutPutWithRightParametersOut()
     {
-	sleep(1);
-	$result = $this->gpio->output(17, 0);
-	$this->assertTrue($result instanceof Gpio);
+        sleep(1);
+        $result = $this->gpio->output(17, 0);
+        $this->assertTrue($result instanceof Gpio);
     }
 
     /**
@@ -73,6 +86,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
      */
     public function testSetupWithRightPinAndWrongDirection()
     {
+        $this->assertPreconditionOrMarkTestSkipped();
         $this->gpio->setup(17, 'wrongDirection');
     }
 
@@ -81,6 +95,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
      */
     public function testSetupWithRightPinAndNullDirection()
     {
+        $this->assertPreconditionOrMarkTestSkipped();
         $this->gpio->setup(17, null);
     }
 

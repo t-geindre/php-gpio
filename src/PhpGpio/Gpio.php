@@ -22,7 +22,14 @@ class Gpio
     // exported pins for when we unexport all
     private $exportedPins = array();
 
-    // Setup pin, takes pin number and direction (in or out)
+
+    /**
+     * Setup pin, takes pin number and direction (in or out)
+     *
+     * @param  int  $pinNo
+     * @param  string  $direction
+     * @return mixed string GPIO value or boolean false
+     */
     public function setup($pinNo, $direction)
     {
         if (!$this->isValidPin($pinNo)) {
@@ -48,6 +55,12 @@ class Gpio
         return $this;
     }
 
+    /**
+     * Get input value
+     *
+     * @param  int  $pinNo
+     * @return mixed string GPIO value or boolean false
+     */
     public function input($pinNo)
     {
         if (!$this->isValidPin($pinNo)) {
@@ -63,7 +76,13 @@ class Gpio
         return false;
     }
 
-    // Value == 1 or 0, where 1 = on, 0 = off
+    /**
+     * Set output value
+     *
+     * @param  int  $pinNo
+     * @param  string  $value
+     * @return mixed Gpio current instance or boolean false
+     */
     public function output($pinNo, $value)
     {
         if (!$this->isValidPin($pinNo)) {
@@ -83,6 +102,12 @@ class Gpio
         return $this;
     }
 
+    /**
+     * Unexport Pin
+     *
+     * @param  int  $pinNo
+     * @return mixed Gpio current instance or boolean false
+     */
     public function unexport($pinNo)
     {
         if (!$this->isValidPin($pinNo)) {
@@ -98,13 +123,26 @@ class Gpio
         return $this;
     }
 
+    /**
+     * Unexport all pins
+     *
+     * @return mixed Gpio current instance or boolean false
+     */
     public function unexportAll()
     {
-        foreach ($this->exportedPins as $key => $pinNo) file_put_contents('/sys/class/gpio/unexport', $pinNo);
+        foreach ($this->exportedPins as $key => $pinNo) {
+            file_put_contents('/sys/class/gpio/unexport', $pinNo);
+        }
         $this->exportedPins = array();
+
+        return $this;
     }
 
-    // Check if exported
+    /**
+     * Check if pin is exported
+     *
+     * @return boolean
+     */
     public function isExported($pinNo)
     {
         if (!$this->isValidPin($pinNo)) {
@@ -114,6 +152,11 @@ class Gpio
         return file_exists('/sys/class/gpio/gpio'.$pinNo);
     }
 
+    /**
+     * get the pin's current direction
+     *
+     * @return mixed string pin's direction value or boolean false
+     */
     public function currentDirection($pinNo)
     {
         if (!$this->isValidPin($pinNo)) {
@@ -123,7 +166,12 @@ class Gpio
         return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/direction');
     }
 
-    // Check for valid direction, in or out
+    /**
+     * Check for valid direction, in or out
+     *
+     * @exception InvalidArgumentException
+     * @return boolean true
+     */
     public function isValidDirection($direction)
     {
         if (!is_string($direction) || empty($direction)) {
@@ -136,7 +184,12 @@ class Gpio
         return true;
     }
 
-    // Check for valid output
+    /**
+     * Check for valid output value
+     *
+     * @exception InvalidArgumentException
+     * @return boolean true
+     */
     public function isValidOutput($output)
     {
         if (!is_int($output)) {
@@ -149,7 +202,12 @@ class Gpio
         return true;
     }
 
-    // Check for valid pin
+    /**
+     * Check for valid pin value
+     *
+     * @exception InvalidArgumentException
+     * @return boolean true
+     */
     public function isValidPin($pinNo)
     {
         if (!is_int($pinNo)) {

@@ -29,12 +29,22 @@ class SensorTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
-     * a valid test
+     * a valid setup test
      */
     public function testSetupWithEmptyArray()
     {
         $this->assertPreconditionOrMarkTestSkipped();
         $result = $this->sensor->setup(array());
+        $this->assertTrue($result instanceof DS18B20);
+    }
+
+    /**
+     * a valid read test
+     */
+    public function testRead()
+    {
+        $this->assertPreconditionOrMarkTestSkipped();
+        $result = $this->sensor->read();
         $this->assertTrue($result instanceof DS18B20);
     }
 

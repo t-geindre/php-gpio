@@ -22,15 +22,14 @@ class DS18B20 implements SensorInterface
      * Read
      *
      * @param array $args
-     * @return $value
+     * @return float $value
      */
     public function read($args = array())
     {
 	$raw = file_get_contents($this->rawFile);
 	$raw = str_replace("\n", "", $raw);
 	$boom = explode('t=',$raw);
-	$temperature = floatval($boom[1]/1000);
-	echo $temperature;
+	return floatval($boom[1]/1000);
     }
 
     /**

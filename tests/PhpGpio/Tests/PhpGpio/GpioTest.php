@@ -32,7 +32,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     {
 	$result = $this->gpio->output(17, 1);
 	$this->assertTrue($result instanceof Gpio);
-    }   
+    }
 
     /**
      * @depends testOutPutWithRightParametersOn
@@ -42,7 +42,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
 	sleep(1);
 	$result = $this->gpio->output(17, 0);
 	$this->assertTrue($result instanceof Gpio);
-    }   
+    }
 
     /**
      * @expectedException InvalidArgumentException

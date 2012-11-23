@@ -15,6 +15,11 @@ class Gpio {
         'in', 'out'
     );
 
+    private $outputs = array(
+    	0, 1
+    );
+
+
     // exported pins for when we unexport all
     private $exportedPins = array();
 
@@ -61,10 +66,9 @@ class Gpio {
         if(!$this->isValidPin($pinNo)) {
             return false;
         }
-        if(empty($value)) {
-            throw new \InvalidArgumentException(sprintf('value "%s" is invalid.', $value));
+        if(!$this->isValidOutput($value)) {
+            return false;
         }
-
         if($this->isExported($pinNo)) {
             if($this->currentDirection($pinNo) != "in") {
                 file_put_contents('/sys/class/gpio/gpio'.$pinNo.'/value', $value);
@@ -120,6 +124,18 @@ class Gpio {
         }
         if (!in_array($direction, $this->directions)) {
             throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (unknown direction).', $direction));
+        }
+
+        return true;
+    }
+
+    // Check for valid output
+    public function isValidOutput($output) {
+        if(!is_int($output)) {
+            throw new \InvalidArgumentException(sprintf('Pin value "%s" is invalid (integer expected).', $output));
+        }
+        if (!in_array($output, $this->outputs)) {
+            throw new \InvalidArgumentException(sprintf('Output value "%s" is invalid (out of exepected range).', $output));
         }
 
         return true;

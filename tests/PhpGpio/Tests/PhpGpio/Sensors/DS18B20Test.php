@@ -33,12 +33,9 @@ class SensorTest extends \PhpUnit_Framework_TestCase
      */
     public function testSetupWithEmptyArray()
     {
-	$this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
         $this->assertPreconditionOrMarkTestSkipped();
         $result = $this->sensor->setup(array());
-        $this->assertTrue($result instanceof DS18B20);
+        $this->assertFalse($result);
     }
 
     /**
@@ -51,37 +48,22 @@ class SensorTest extends \PhpUnit_Framework_TestCase
         $this->assertTrue(is_float($result));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testSetupWithWrongNullParameter()
     {
-	$this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-        $this->sensor->setup(null);
+        $result = $this->sensor->setup(null);
+        $this->assertFalse($result);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testSetupWithWrongStringParameter()
     {
-	$this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-        $this->sensor->setup('foo');
+        $result = $this->sensor->setup('foo');
+        $this->assertFalse($result);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testSetupWithWrongIntParameter()
     {
-	$this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-        $this->sensor->setup(1);
+        $result = $this->sensor->setup(1);
+        $this->assertFalse($result);
     }
 
 }

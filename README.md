@@ -78,13 +78,15 @@ Usage
 Unit Tests
 ----------
 
+PhpUnit tests over php-gpio usually require a sudoable user.
 To run unit tests, you'll need `cURL` and a set of dependencies you can install using Composer:
 
 ``` bash
 $ wget http://pear.phpunit.de/get/phpunit.phar
 $ chmod +x phpunit.phar
-$ phpunit
+$ sudo phpunit.phar
 ```
+
 
 Credits
 -------

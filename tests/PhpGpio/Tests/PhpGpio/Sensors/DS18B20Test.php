@@ -45,7 +45,7 @@ class SensorTest extends \PhpUnit_Framework_TestCase
     {
         $this->assertPreconditionOrMarkTestSkipped();
         $result = $this->sensor->read();
-        $this->assertTrue($result instanceof DS18B20);
+        $this->assertTrue(is_float($result));
     }
 
     /**

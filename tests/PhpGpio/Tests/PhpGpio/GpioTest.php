@@ -26,9 +26,28 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
+     * @depends testSetupWithRightParamters
+     */
+    public function testOutPutWithRightParametersOn()
+    {
+	$result = $this->gpio->output(17, 1);
+	$this->assertTrue($result instanceof Gpio);
+    }   
+
+    /**
+     * @depends testOutPutWithRightParametersOn
+     */
+    public function testOutPutWithRightParametersOut()
+    {
+	sleep(1);
+	$result = $this->gpio->output(17, 0);
+	$this->assertTrue($result instanceof Gpio);
+    }   
+
+    /**
      * @expectedException InvalidArgumentException
      */
-    public function testSetupWithNegativePinAndGoodDirection()
+    public function testSetupWithNegativePinAndRightDirection()
     {
         $this->gpio->setup(-1, 'out');
     }
@@ -36,7 +55,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testSetupWithNullPinAndGoodDirection()
+    public function testSetupWithNullPinAndRightDirection()
     {
         $this->gpio->setup(null, 'out');
     }
@@ -44,7 +63,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testSetupWithWrongPinAndGoodDirection()
+    public function testSetupWithWrongPinAndRightDirection()
     {
         $this->gpio->setup('wrongPin', 'out');
     }
@@ -52,7 +71,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testSetupWithGoodPinAndWrongDirection()
+    public function testSetupWithRightPinAndWrongDirection()
     {
         $this->gpio->setup(17, 'wrongDirection');
     }
@@ -60,7 +79,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testSetupWithGoodPinAndNullDirection()
+    public function testSetupWithRightPinAndNullDirection()
     {
         $this->gpio->setup(17, null);
     }

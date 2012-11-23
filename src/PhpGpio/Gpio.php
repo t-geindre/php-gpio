@@ -2,8 +2,8 @@
 
 namespace PhpGpio;
 
-class Gpio {
-
+class Gpio
+{
     // Using BCM pin numbers.
     private $pins = array(
         0, 1, 4, 7, 8, 9,
@@ -16,21 +16,21 @@ class Gpio {
     );
 
     private $outputs = array(
-    	0, 1
+        0, 1
     );
-
 
     // exported pins for when we unexport all
     private $exportedPins = array();
 
     // Setup pin, takes pin number and direction (in or out)
-    public function setup($pinNo, $direction) {
-        if(!$this->isValidPin($pinNo)) {
+    public function setup($pinNo, $direction)
+    {
+        if (!$this->isValidPin($pinNo)) {
             return false;
         }
 
         // if exported, unexport it first
-        if($this->isExported($pinNo)) {
+        if ($this->isExported($pinNo)) {
             $this->unexport($pinNo);
         }
 
@@ -38,7 +38,7 @@ class Gpio {
         file_put_contents('/sys/class/gpio/export', $pinNo);
 
         // if valid direction then set direction
-        if($this->isValidDirection($direction)) {
+        if ($this->isValidDirection($direction)) {
             file_put_contents('/sys/class/gpio/gpio'.$pinNo.'/direction', $direction);
         }
 
@@ -48,29 +48,32 @@ class Gpio {
         return $this;
     }
 
-    public function input($pinNo) {
-        if(!$this->isValidPin($pinNo)) {
+    public function input($pinNo)
+    {
+        if (!$this->isValidPin($pinNo)) {
             return false;
         }
-        if($this->isExported($pinNo)) {
-            if($this->currentDirection($pinNo) != "out") {
+        if ($this->isExported($pinNo)) {
+            if ($this->currentDirection($pinNo) != "out") {
                return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value');
             }
             throw new \Exception('Error!' . $this->currentDirection($pinNo) . ' is a wrong direction for this pin!');
         }
+
         return false;
     }
 
     // Value == 1 or 0, where 1 = on, 0 = off
-    public function output($pinNo, $value) {
-        if(!$this->isValidPin($pinNo)) {
+    public function output($pinNo, $value)
+    {
+        if (!$this->isValidPin($pinNo)) {
             return false;
         }
-        if(!$this->isValidOutput($value)) {
+        if (!$this->isValidOutput($value)) {
             return false;
         }
-        if($this->isExported($pinNo)) {
-            if($this->currentDirection($pinNo) != "in") {
+        if ($this->isExported($pinNo)) {
+            if ($this->currentDirection($pinNo) != "in") {
                 file_put_contents('/sys/class/gpio/gpio'.$pinNo.'/value', $value);
             } else {
                 throw new \Exception('Error! Wrong Direction for this pin! Meant to be out while it is ' . $this->currentDirection($pinNo));
@@ -80,11 +83,12 @@ class Gpio {
         return $this;
     }
 
-    public function unexport($pinNo) {
-        if(!$this->isValidPin($pinNo)) {
+    public function unexport($pinNo)
+    {
+        if (!$this->isValidPin($pinNo)) {
             return false;
         }
-       if($this->isExported($pinNo)) {
+       if ($this->isExported($pinNo)) {
             file_put_contents('/sys/class/gpio/unexport', $pinNo);
             foreach ($this->exportedPins as $key => $value) {
                 if($value == $pinNo) unset($key);
@@ -94,23 +98,25 @@ class Gpio {
         return $this;
     }
 
-    public function unexportAll() {
+    public function unexportAll()
+    {
         foreach ($this->exportedPins as $key => $pinNo) file_put_contents('/sys/class/gpio/unexport', $pinNo);
         $this->exportedPins = array();
     }
 
     // Check if exported
-    public function isExported($pinNo) {
-        if(!$this->isValidPin($pinNo)) {
+    public function isExported($pinNo)
+    {
+        if (!$this->isValidPin($pinNo)) {
             return false;
         }
 
         return file_exists('/sys/class/gpio/gpio'.$pinNo);
     }
 
-    public function currentDirection($pinNo) {
-        if(!$this->isValidPin($pinNo))
-        {
+    public function currentDirection($pinNo)
+    {
+        if (!$this->isValidPin($pinNo)) {
             return false;
         }
 
@@ -118,8 +124,9 @@ class Gpio {
     }
 
     // Check for valid direction, in or out
-    public function isValidDirection($direction) {
-        if(!is_string($direction) || empty($direction)) {
+    public function isValidDirection($direction)
+    {
+        if (!is_string($direction) || empty($direction)) {
             throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (string expected).', $direction));
         }
         if (!in_array($direction, $this->directions)) {
@@ -130,8 +137,9 @@ class Gpio {
     }
 
     // Check for valid output
-    public function isValidOutput($output) {
-        if(!is_int($output)) {
+    public function isValidOutput($output)
+    {
+        if (!is_int($output)) {
             throw new \InvalidArgumentException(sprintf('Pin value "%s" is invalid (integer expected).', $output));
         }
         if (!in_array($output, $this->outputs)) {
@@ -142,8 +150,9 @@ class Gpio {
     }
 
     // Check for valid pin
-    public function isValidPin($pinNo) {
-        if(!is_int($pinNo)) {
+    public function isValidPin($pinNo)
+    {
+        if (!is_int($pinNo)) {
             throw new \InvalidArgumentException(sprintf('Pin number "%s" is invalid (integer expected).', $pinNo));
         }
         if (!in_array($pinNo, $this->pins)) {
@@ -153,4 +162,3 @@ class Gpio {
         return true;
     }
 }
-?>

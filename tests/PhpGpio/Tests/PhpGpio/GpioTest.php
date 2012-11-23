@@ -107,5 +107,4 @@ class GpioTest extends \PhpUnit_Framework_TestCase
         $this->gpio->setup(17);
     }
 
-
 }

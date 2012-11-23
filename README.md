@@ -2,7 +2,7 @@ php-gpio
 ========
 
 
-**php-gpio** is a simple PHP library to allow access to the GPIO on the Raspberry Pi.
+**php-gpio** is a simple PHP library to play with the Raspberry PI's GPIO pins.
 
 It provides simple tools such as reading & writing to pins
 

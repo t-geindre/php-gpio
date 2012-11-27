@@ -82,8 +82,9 @@ API usage:
 Unit Tests
 ----------
 
-PhpUnit tests over php-gpio usually require a sudoable user.
-To run unit tests, you'll need `cURL` and a set of dependencies you can install using Composer:
+PhpUnit tests over php-gpio usually require a sudoable user (because of the gpio operations).
+To run unit tests, you can download & use the single PhpUnit package.
+This can be easily done using `cURL`, to get the standalone PhpUnit's phar file:
 
 ``` bash
 $ wget http://pear.phpunit.de/get/phpunit.phar

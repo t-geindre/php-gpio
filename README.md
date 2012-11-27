@@ -52,6 +52,10 @@ require_once 'src/autoload.php';
 Usage
 -----
 
+See [Temperature-Pi](https://github.com/ronanguilloux/temperature-pi), a simple php project reading & logging temperatures using a DS18B20 1-Wire digital temperature sensor & this php-gpio library.
+
+API usage:
+
 ``` php
 <?php
     echo "Setting up Pins 17 and 22\n";

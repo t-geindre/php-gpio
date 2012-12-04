@@ -49,8 +49,8 @@ require_once 'src/autoload.php';
 ```
 
 
-Usage
------
+API Usage
+---------
 
 ``` php
 <?php
@@ -75,11 +75,20 @@ Usage
 ```
 
 
+API Implementations
+-------------------
+
+Some php-gpio api examples / demo :  
+
+* [Temperature-Pi](https://github.com/ronanguilloux/temperature-pi), a simple php project reading & logging temperatures using a DS18B20 1-Wire digital temperature sensor & this php-gpio library.
+
+
 Unit Tests
 ----------
 
-PhpUnit tests over php-gpio usually require a sudoable user.
-To run unit tests, you'll need `cURL` and a set of dependencies you can install using Composer:
+PhpUnit tests over php-gpio usually require a sudoable user (because of the gpio operations).
+To run unit tests, you can download & use the single PhpUnit package.
+This can be easily done using `cURL`, to get the standalone PhpUnit's phar file:
 
 ``` bash
 $ wget http://pear.phpunit.de/get/phpunit.phar

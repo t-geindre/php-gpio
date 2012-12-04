@@ -2,7 +2,7 @@
 
 $rpi = 'raspberrypi';
 if ($rpi !== $nodename = exec('uname --nodename')) {
-    $warning = sprintf("Precondition is not met : %s is not a %s machine! ", $nodename, $rpi);
+    $warning = sprintf("[WARN] %s is not a %s machine: not all tests can be run.", $nodename, $rpi);
     echo <<<EOT
 
 $warning

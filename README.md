@@ -75,7 +75,7 @@ API Usage
 ```
 
 
-API implementations
+API Implementations
 -------------------
 
 Some php-gpio api examples / demo :  

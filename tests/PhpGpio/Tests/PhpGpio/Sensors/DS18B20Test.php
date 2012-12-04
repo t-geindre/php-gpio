@@ -10,11 +10,12 @@ use PhpGpio\Sensors\DS18B20;
 class SensorTest extends \PhpUnit_Framework_TestCase
 {
     private $sensor;
-    private $rpi ='raspberrypi';
+    private $rpi = 'raspberrypi';
+    private $wireDriver = "";
 
     public function setUp()
     {
-        $this->sensor = new DS18B20();
+        $this->sensor = new DS18B20($this->$wireDriver);
     }
 
     /**

@@ -2,6 +2,15 @@
 
 namespace PhpGpio\Sensors;
 
+
+/*
+ * 1-Wire is a device communications bus system designed by Dallas Semiconductor Corp.
+ * that provides low-speed data, signaling, and power over a single signal.
+ * 1-Wire is similar in concept to I²C, but with lower data rates and longer range.
+ * It is typically used to communicate with small inexpensive devices
+ * such as digital thermometers and weather instruments.
+ * (source : http://en.wikipedia.org/wiki/1-Wire)
+*/
 class DS18B20 implements SensorInterface
 {
 

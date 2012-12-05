@@ -14,7 +14,7 @@ namespace PhpGpio\Sensors;
 class DS18B20 implements SensorInterface
 {
 
-    private $bus; // ex: '/sys/bus/w1/devices/28-000003ced8f4/w1_slave'
+    private $bus = null; // ex: '/sys/bus/w1/devices/28-000003ced8f4/w1_slave'
 
     /**
      *  Get-Accesssor
@@ -60,11 +60,11 @@ class DS18B20 implements SensorInterface
     {
         $busFolders = glob('/sys/bus/w1/devices/28-*'); // predictable path on a Raspberry Pi
         $busPath = false;
-        if (0 > count($busFolders)) {
+        if (count($busFolders)) {
             $busPath = $busFolders[0];
         }
 
-        return $busPath;
+        return $busPath . '/w1_slave';
     }
 
     /**
@@ -75,7 +75,10 @@ class DS18B20 implements SensorInterface
      */
     public function read($args = array())
     {
-        $raw = file_get_contents($this->rawFile);
+        if(is_null($this->bus)) {
+            throw new \Exception('You have to setup() the sensor (even with empty args) before using the read() method');
+        }
+        $raw = file_get_contents($this->bus);
         $raw = str_replace("\n", "", $raw);
         $boom = explode('t=',$raw);
 

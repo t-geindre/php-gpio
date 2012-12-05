@@ -93,7 +93,9 @@ This can be easily done using `cURL`, to get the standalone PhpUnit's phar file:
 ``` bash
 $ wget http://pear.phpunit.de/get/phpunit.phar
 $ chmod +x phpunit.phar
-$ sudo phpunit.phar
+$ wget http://getcomposer.org/composer.phar
+$ php composer.phar install --dev
+$ sudo /usr/bin/php phpunit.phar
 ```
 
 

@@ -41,7 +41,7 @@ class DS18B20 implements SensorInterface
     public function setup($args = array())
     {
         $this->bus = $this->guessBus();
-        if(file_exists($args['bus'])) {
+        if(!empty($args['bus']) && file_exists($args['bus'])) {
             $this->bus = $args['bus'];
         }
 

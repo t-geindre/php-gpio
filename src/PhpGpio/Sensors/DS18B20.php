@@ -10,11 +10,27 @@ namespace PhpGpio\Sensors;
  * It is typically used to communicate with small inexpensive devices
  * such as digital thermometers and weather instruments.
  * (source : http://en.wikipedia.org/wiki/1-Wire)
-*/
+ */
 class DS18B20 implements SensorInterface
 {
 
-    private $rawFile = '/sys/bus/w1/devices/28-000003ced8f4/w1_slave';
+    private $bus; // ex: '/sys/bus/w1/devices/28-000003ced8f4/w1_slave'
+
+    /**
+     *  Get-Accesssor
+     */
+    public function getBus()
+    {
+        return $this->bus;
+    }
+
+    /**
+     *  Set-Accesssor
+     */
+    public function setBus($value)
+    {
+        $this->bus = $value;
+    }
 
     /**
      * Setup
@@ -24,7 +40,31 @@ class DS18B20 implements SensorInterface
      */
     public function setup($args = array())
     {
-        return false;
+        $this->bus = $this->guessBus();
+        if(file_exists($args['bus'])) {
+            $this->bus = $args['bus'];
+        }
+
+        return $this;
+    }
+
+    /**
+     * guessBus: Guess the thermal sensor bus folder path
+     *
+     * the directory 28-*** indicates the DS18B20 thermal sensor is wired to the bus
+     * (28 is the family ID) and the unique ID is a 12-chars numerical digit
+     *
+     * @return string $busPath
+     */
+    public function guessBus()
+    {
+        $busFolders = glob('/sys/bus/w1/devices/28-*'); // predictable path on a Raspberry Pi
+        $busPath = false;
+        if (0 > count($busFolders)) {
+            $busPath = $busFolders[0];
+        }
+
+        return $busPath;
     }
 
     /**
@@ -35,11 +75,11 @@ class DS18B20 implements SensorInterface
      */
     public function read($args = array())
     {
-    $raw = file_get_contents($this->rawFile);
-    $raw = str_replace("\n", "", $raw);
-    $boom = explode('t=',$raw);
+        $raw = file_get_contents($this->rawFile);
+        $raw = str_replace("\n", "", $raw);
+        $boom = explode('t=',$raw);
 
-    return floatval($boom[1]/1000);
+        return floatval($boom[1]/1000);
     }
 
     /**

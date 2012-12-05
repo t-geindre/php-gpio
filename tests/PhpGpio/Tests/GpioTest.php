@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpGpio\Tests\PhpGio;
+namespace PhpGpio\Tests;
 
 use PhpGpio\Gpio;
 

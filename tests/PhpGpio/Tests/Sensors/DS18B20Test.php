@@ -1,21 +1,20 @@
 <?php
 
-namespace PhpGpio\Tests\PhpGio;
+namespace PhpGpio\Tests\Sensors;
 
 use PhpGpio\Sensors\DS18B20;
 
 /**
  * @author Ronan Guilloux <ronan.guilloux@gmail.com>
  */
-class SensorTest extends \PhpUnit_Framework_TestCase
+class DS18B20Test extends \PhpUnit_Framework_TestCase
 {
     private $sensor;
-    private $rpi = 'raspberrypi';
-    private $wireDriver = "";
+    private $rpi = 'rypi';
 
     public function setUp()
     {
-        $this->sensor = new DS18B20($this->$wireDriver);
+        $this->sensor = new DS18B20();
     }
 
     /**
@@ -30,16 +29,6 @@ class SensorTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
-     * a valid setup test
-     */
-    public function testSetupWithEmptyArray()
-    {
-        $this->assertPreconditionOrMarkTestSkipped();
-        $result = $this->sensor->setup(array());
-        $this->assertFalse($result);
-    }
-
-    /**
      * a valid read test
      */
     public function testRead()
@@ -49,22 +38,38 @@ class SensorTest extends \PhpUnit_Framework_TestCase
         $this->assertTrue(is_float($result));
     }
 
+    public function testSetupWithWrongEmptyArray()
+    {
+        $this->assertPreconditionOrMarkTestSkipped();
+        $result = $this->sensor->setup(array());
+        $this->assertFalse($result->getBus());
+    }
+
     public function testSetupWithWrongNullParameter()
     {
         $result = $this->sensor->setup(null);
-        $this->assertFalse($result);
+        $this->assertFalse($result->getBus());
+    }
+
+    /**
+     * Testing sesnor's setup() method with a valid filePath for the bus arg
+     */
+    public function testSetupWithRightBusParameter()
+    {
+        $result = $this->sensor->setup(array('bus'=>'/etc/hosts'));
+        $this->assertTrue(file_exists($result->getBus()));
     }
 
     public function testSetupWithWrongStringParameter()
     {
         $result = $this->sensor->setup('foo');
-        $this->assertFalse($result);
+        $this->assertFalse($result->getBus());
     }
 
     public function testSetupWithWrongIntParameter()
     {
         $result = $this->sensor->setup(1);
-        $this->assertFalse($result);
+        $this->assertFalse($result->getBus());
     }
 
 }

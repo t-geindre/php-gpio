@@ -1,2 +1,0 @@
-* Use glob() to fetch the last 28* temperature sensor (28 = temperature, see w1 documentation)
-* Allow to set the 28* address in the DS18B20 constructor

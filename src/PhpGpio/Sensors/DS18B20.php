@@ -2,7 +2,6 @@
 
 namespace PhpGpio\Sensors;
 
-
 /*
  * 1-Wire is a device communications bus system designed by Dallas Semiconductor Corp.
  * that provides low-speed data, signaling, and power over a single signal.
@@ -31,12 +30,12 @@ class DS18B20 implements SensorInterface
     public function setBus($value)
     {
         // ? is a non empty string, & a valid file path
-        if(empty($value) || !is_string($value) || !file_exists($value)) {
+        if (empty($value) || !is_string($value) || !file_exists($value)) {
             throw new \InvalidArgumentException("$value is not a valid w1 bus path");
         }
 
         // ? is a regular w1-bus path on a Raspbery ?
-        if(!strstr($value, self::BASEPATH)) {
+        if (!strstr($value, self::BASEPATH)) {
             throw new \InvalidArgumentException("$value does not seem to be a regular w1 bus path");
         }
 
@@ -84,7 +83,7 @@ class DS18B20 implements SensorInterface
      */
     public function read($args = array())
     {
-        if(!is_string($this->bus) || !file_exists($this->bus)) {
+        if (!is_string($this->bus) || !file_exists($this->bus)) {
             throw new \Exception("No bus file found: please run sudo modprobe w1-gpio; sudo modprobe w1-therm & check the guessBus() method result");
         }
         $raw = file_get_contents($this->bus);

@@ -79,7 +79,6 @@ class DS18B20Test extends \PhpUnit_Framework_TestCase
         $this->assertTrue(file_exists($result));
     }
 
-
     /**
      * a valid read test
      */
@@ -89,6 +88,5 @@ class DS18B20Test extends \PhpUnit_Framework_TestCase
         $result = $this->sensor->read();
         $this->assertTrue(is_float($result));
     }
-
 
 }

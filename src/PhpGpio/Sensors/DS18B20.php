@@ -75,7 +75,7 @@ class DS18B20 implements SensorInterface
      */
     public function read($args = array())
     {
-        if(is_null($this->bus)) {
+        if(is_null($this->bus) || !file_exists($this->bus)) {
             throw new \Exception('You have to setup() the sensor (even with empty args) before using the read() method');
         }
         $raw = file_get_contents($this->bus);

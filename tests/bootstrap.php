@@ -4,13 +4,19 @@ $rpi = 'raspberrypi';
 if ($rpi !== $nodename = exec('uname --nodename')) {
     $warning = sprintf("[WARN] %s is not a %s machine: not all tests can be run.", $nodename, $rpi);
     echo <<<EOT
-
 $warning
-
 
 EOT;
 }
 
+if('root' !== $_SERVER['USER'] || empty($_SERVER['SUDO_USER'])){
+    $warning = sprintf("[ABORT] Please run this script as root: sudo ./phpunit.phar", $_SERVER['USER']);
+    echo <<<EOT
+$warning
+
+EOT;
+    die();
+}
 
 if (!extension_loaded('curl') || !function_exists('curl_init')) {
     die(<<<EOT

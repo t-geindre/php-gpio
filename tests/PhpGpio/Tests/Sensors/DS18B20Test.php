@@ -29,6 +29,58 @@ class DS18B20Test extends \PhpUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetBusWithWrongNonExisitingFilePath()
+    {
+        //$this->assertPreconditionOrMarkTestSkipped();
+        $result = $this->sensor->setBus('/foo/bar/.baz');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetBusWithWrongNullParameter()
+    {
+        $result = $this->sensor->setBus(null);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetBusWithWrongExistingFile()
+    {
+        $result = $this->sensor->setBus('/etc/hosts');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetBusWithWrongStringParameter()
+    {
+        $result = $this->sensor->setBus('foo');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetBusWithWrongIntParameter()
+    {
+        $result = $this->sensor->setBus(1);
+    }
+
+    /**
+     * a valid guessBus test
+     */
+    public function testValidGuessBus()
+    {
+        $this->assertPreconditionOrMarkTestSkipped();
+        $result = $this->sensor->guessBus();
+        $this->assertTrue(file_exists($result));
+    }
+
+
+    /**
      * a valid read test
      */
     public function testRead()

@@ -15,6 +15,7 @@ class DS18B20 implements SensorInterface
 {
 
     private $bus = null; // ex: '/sys/bus/w1/devices/28-000003ced8f4/w1_slave'
+    const BASEPATH = '/sys/bus/w1/devices/28-';
 
     /**
      *  Get-Accesssor
@@ -29,6 +30,16 @@ class DS18B20 implements SensorInterface
      */
     public function setBus($value)
     {
+        // ? is a non empty string, & a valid file path
+        if(empty($value) || !is_string($value) || !file_exists($value)) {
+            throw new \InvalidArgumentException("$value is not a valid w1 bus path");
+        }
+
+        // ? is a regular w1-bus path on a Raspbery ?
+        if(!strstr($value, self::BASEPATH)) {
+            throw new \InvalidArgumentException("$value does not seem to be a regular w1 bus path");
+        }
+
         $this->bus = $value;
     }
 
@@ -55,11 +66,12 @@ class DS18B20 implements SensorInterface
      */
     public function guessBus()
     {
-        $busFolders = glob('/sys/bus/w1/devices/28-*'); // predictable path on a Raspberry Pi
+        $busFolders = glob(self::BASEPATH . '*'); // predictable path on a Raspberry Pi
         $busPath = false;
-        if (count($busFolders)) {
-            $busPath = $busFolders[0];
+        if (0 === count($busFolders)) {
+            return false;
         }
+        $busPath = $busFolders[0]; // get the first thermal sensor found
 
         return $busPath . '/w1_slave';
     }
@@ -72,8 +84,8 @@ class DS18B20 implements SensorInterface
      */
     public function read($args = array())
     {
-        if(is_null($this->bus) || !file_exists($this->bus)) {
-            throw new \Exception('You have to setup() the sensor (even with empty args) before using the read() method');
+        if(!is_string($this->bus) || !file_exists($this->bus)) {
+            throw new \Exception("No bus file found: please run sudo modprobe w1-gpio; sudo modprobe w1-therm & check the guessBus() method result");
         }
         $raw = file_get_contents($this->bus);
         $raw = str_replace("\n", "", $raw);

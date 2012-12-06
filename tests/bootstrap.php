@@ -10,7 +10,7 @@ EOT;
 }
 
 if('root' !== $_SERVER['USER'] || empty($_SERVER['SUDO_USER'])){
-    $warning = sprintf("[ABORT] Please run this script as root: sudo ./phpunit.phar", $_SERVER['USER']);
+    $warning = sprintf("[ABORT] Please run this script as root: sudo phpunit or sudo ./phpunit.phar", $_SERVER['USER']);
     echo <<<EOT
 $warning
 

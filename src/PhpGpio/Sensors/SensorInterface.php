@@ -9,14 +9,6 @@ interface SensorInterface
 {
 
     /**
-     * Setup
-     *
-     * @param array $args
-     * @return $this
-     */
-    public function setup($args = array());
-
-    /**
      * Read
      *
      * @param array $args

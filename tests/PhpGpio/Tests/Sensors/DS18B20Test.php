@@ -86,7 +86,7 @@ class DS18B20Test extends \PhpUnit_Framework_TestCase
     public function testRead()
     {
         $this->assertPreconditionOrMarkTestSkipped();
-        $result = $this->sensor->setup()->read();
+        $result = $this->sensor->read();
         $this->assertTrue(is_float($result));
     }
 

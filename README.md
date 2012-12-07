@@ -98,6 +98,11 @@ $ php composer.phar install --dev
 $ sudo /usr/bin/php phpunit.phar
 ```
 
+PHP Quality
+-----------
+
+For [PHP quality fans](http://phpqatools.org), and for my self coding improvement, I wrote a little script available in the ./bin directory I launch to check my PHP code: It produces various stats & metrics & improvements tips on the code.
+
 
 Credits
 -------

@@ -49,7 +49,7 @@ class Gpio
         }
 
         // Add to exported pins array
-        $exportedPins[] = $pinNo;
+        $this->exportedPins[] = $pinNo;
 
         return $this;
     }
@@ -129,7 +129,7 @@ class Gpio
      */
     public function unexportAll()
     {
-        foreach ($this->exportedPins as $key => $pinNo) {
+        foreach ($this->exportedPins as $pinNo) {
             file_put_contents('/sys/class/gpio/unexport', $pinNo);
         }
         $this->exportedPins = array();

@@ -11,6 +11,18 @@ class Gpio
         21, 22, 23, 24, 25
     );
 
+    /**
+     * getHackablePins : the pins you can hack with.
+     * @link http://elinux.org/RPi_Low-level_peripherals
+     * @return array
+     */
+    public function getHackablePins()
+    {
+        return array(
+           4, 17, 18, 21, 22, 23,24, 25
+        );
+    }
+
     private $directions = array(
         'in', 'out'
     );
@@ -67,7 +79,7 @@ class Gpio
         }
         if ($this->isExported($pinNo)) {
             if ($this->currentDirection($pinNo) != "out") {
-               return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value');
+                return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value');
             }
             throw new \Exception('Error!' . $this->currentDirection($pinNo) . ' is a wrong direction for this pin!');
         }
@@ -112,7 +124,7 @@ class Gpio
         if (!$this->isValidPin($pinNo)) {
             return false;
         }
-       if ($this->isExported($pinNo)) {
+        if ($this->isExported($pinNo)) {
             file_put_contents('/sys/class/gpio/unexport', $pinNo);
             foreach ($this->exportedPins as $key => $value) {
                 if($value == $pinNo) unset($key);

@@ -11,10 +11,19 @@ class GpioTest extends \PhpUnit_Framework_TestCase
 {
     private $gpio;
     private $rpi ='raspberrypi';
+    private $hackablePins = array();
 
     public function setUp()
     {
         $this->gpio = new Gpio();
+
+        // defaut should be: $this->hackablePins = $this->gpio->getHackablePins();
+        // but in this test set, the Raspi is wired to a breadboard
+        // and the 4th Gpio pin is reserved to read the DS18B20 sensor.
+        // Other available gpio pins are connected to LEDs
+        $this->hackablePins = array(
+           17, 18, 21, 22, 23,24, 25
+       );
     }
 
     /**
@@ -29,32 +38,40 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     }
 
     /**
-     * a valid test
+     * Setting up gpio pins
      */
-    public function testSetupWithRightParamters()
+    public function testSetupWithRightParamaters()
     {
         $this->assertPreconditionOrMarkTestSkipped();
-        $result = $this->gpio->setup(17, 'out');
-        $this->assertTrue($result instanceof Gpio);
+        foreach($this->hackablePins as $pin) {
+            $result = $this->gpio->setup($pin, 'out');
+            $this->assertTrue($result instanceof Gpio);
+        }
     }
 
     /**
-     * @depends testSetupWithRightParamters
+     * Outputting gpio pins (ON)
+     * @depends testSetupWithRightParamaters
      */
     public function testOutPutWithRightParametersOn()
     {
-        $result = $this->gpio->output(17, 1);
-        $this->assertTrue($result instanceof Gpio);
+        foreach($this->hackablePins as $pin) {
+            $result = $this->gpio->output($pin, 1);
+            $this->assertTrue($result instanceof Gpio);
+        }
     }
 
     /**
+     * Outputting gpio pins (OFF)
      * @depends testOutPutWithRightParametersOn
      */
     public function testOutPutWithRightParametersOut()
     {
         sleep(1);
-        $result = $this->gpio->output(17, 0);
-        $this->assertTrue($result instanceof Gpio);
+        foreach($this->hackablePins as $pin) {
+            $result = $this->gpio->output($pin, 0);
+            $this->assertTrue($result instanceof Gpio);
+        }
     }
 
     /**

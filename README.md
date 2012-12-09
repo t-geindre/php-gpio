@@ -4,7 +4,14 @@ php-gpio
 
 **php-gpio** is a simple PHP library to play with the Raspberry PI's GPIO pins.
 
-It provides simple tools such as reading & writing to pins
+It provides simple tools such as reading & writing to pins.
+
+General Purpose Input/Output (a.k.a. GPIO) is a generic pin on a chip whose behavior
+(including whether it is an input or output pin) can be controlled (programmed) through software.
+The Raspberry Pi allows peripherals and expansion boards (such as the Rpi Gertboard)
+to access the CPU by exposing the inputs and outputs.
+
+For further informations about the Raspberry Pi's GPIO capabilities, see docs & schemas at http://elinux.org/RPi_Low-level_peripherals.
 
 [![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio)
 

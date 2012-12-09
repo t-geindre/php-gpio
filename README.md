@@ -127,6 +127,11 @@ Run your blink tester code :
 $ php blinkTester.php
 ```
 
+Note that if you call the blinker.php script with appropriate php-cli arguments in the exec() command, by example a gpio-pin ID, 
+and if you extend the blinker.php to manage such commmand-line arguments, 
+then just only one blinker.php script is needed to manage all the leds, 
+and your webserver application needs only one php file to be specified in /etc/sudoers.
+
 
 API Implementations
 -------------------

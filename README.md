@@ -55,7 +55,7 @@ API Usage
 ``` php
 <?php
     
-    # test.php
+    # blinker.php
     
     require 'vendor/autoload.php';
     
@@ -82,6 +82,43 @@ API Usage
 ```
 
 
+Understanding I/O permissions
+-----------------------------
+
+Permissions make sense: it's bad pratice to run Apache2 user as root.
+
+In order to blink a led without exposing you Raspbery Pi to security issues, 
+just allow your `www-data` or your `pi` user to run the script that blinks the leds for you:
+
+``` php
+<?php
+    
+    # blinkTester.php
+    
+    // See blinker.php code in API usage section in README.md
+    $result = exec('sudo blinker.php'); 
+```
+
+Then edit your `/etc/sudoers` file to allow, say, Pi & Apache2 users to run freely the blinker.php file, and only this one:
+
+``` bash
+$ sudo visudo
+```
+
+Then add this two lines in your `/etc/sudoers` file :  
+
+``` bash
+pi ALL=NOPASSWD: /path/to/blinker.php
+www-data ALL=NOPASSWD: /tmp/php-gpio/blinker.php
+```
+
+Then test your blinker :
+
+``` bash
+$ php blinkTester.php
+```
+
+
 API Implementations
 -------------------
 
@@ -93,8 +130,9 @@ Some php-gpio api examples / demo :
 Unit Tests
 ----------
 
-PhpUnit tests over php-gpio usually require a sudoable user (because of the gpio operations).
-To run unit tests, you can download & use the single PhpUnit package.
+Running the full PhpUnit tests set over php-gpio require a sudoable user, because of various gpio operations.
+Such practice isn't security-aware & therefore not recommeded in an Internet environment (see I/O permissions section).
+Instead of installing phpunit, you can just download & use the single PhpUnit package.
 This can be easily done using `cURL`, to get the standalone PhpUnit's phar file:
 
 ``` bash

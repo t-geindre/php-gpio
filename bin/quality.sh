@@ -5,9 +5,11 @@
 # pdepend: https://github.com/pdepend/pdepend
 # php-cs-fixer: https://github.com/fabpot/PHP-CS-Fixer
 
-phploc src/ > STATS
-phpmd src/ text codesize,unusedcode,naming >> STATS
-phpcpd src/ >> STATS
-pdepend src/ >> STATS
-php-cs-fixer fix src/ --dry-run >> STATS
+phploc src/ > METRICS
+phpmd src/ text codesize,unusedcode,naming >> METRICS
+phpcpd src/ >> METRICS
+pdepend src/ >> METRICS
+php-cs-fixer fix src/ --dry-run >> METRICS
+cat METRICS
+rm METRICS
 

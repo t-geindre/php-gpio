@@ -54,11 +54,11 @@ API Usage
 
 ``` php
 <?php
-    
+
     # blinker.php
-    
+
     require 'vendor/autoload.php';
-    
+
     use PhpGpio\Gpio;
 
     echo "Setting up Pins 17 and 22\n";
@@ -87,32 +87,33 @@ Understanding I/O permissions
 
 Permissions make sense: it's bad pratice to run Apache2 user as root.
 
-In order to blink a led without exposing you Raspbery Pi to security issues, 
+In order to blink a led without exposing you Raspbery Pi to security issues,
 just allow your `www-data` or your `pi` user to run the script that blinks the leds for you:
-
-``` php
-<?php
-    
-    # blinkTester.php
-    
-    // See blinker.php code in API usage section in README.md
-    $result = exec('sudo blinker.php'); 
-```
-
-Then edit your `/etc/sudoers` file to allow, say, Pi & Apache2 users to run freely the blinker.php file, and only this one:
+To allow  Pi & Apache2 users to run freely the blinker.php file, and only this one,
+edit your `/etc/sudoers` file:
 
 ``` bash
 $ sudo visudo
 ```
 
-Then add this two lines in your `/etc/sudoers` file :  
+Then add this two lines in your `/etc/sudoers` file :
 
 ``` bash
 pi ALL=NOPASSWD: /path/to/blinker.php
 www-data ALL=NOPASSWD: /tmp/php-gpio/blinker.php
 ```
+Create a blinker.php file: See blinker.php code in API usage section in README.md.
+Then create a blinkTester.php file:
 
-Then test your blinker :
+``` php
+<?php
+
+    # blinkTester.php
+
+    $result = exec('sudo blinker.php');
+```
+
+Run your blink tester :
 
 ``` bash
 $ php blinkTester.php
@@ -122,7 +123,7 @@ $ php blinkTester.php
 API Implementations
 -------------------
 
-Some php-gpio api examples / demo :  
+Some php-gpio api examples / demo :
 
 * [Temperature-Pi](https://github.com/ronanguilloux/temperature-pi), a simple php project reading & logging temperatures using a DS18B20 1-Wire digital temperature sensor & this php-gpio library.
 
@@ -130,7 +131,7 @@ Some php-gpio api examples / demo :
 Unit Tests
 ----------
 
-Running the full PhpUnit tests set over php-gpio require a sudoable user, because of various gpio operations.
+Running the full PhpUnit tests set over php-gpio requires a sudoable user, because of various gpio operations.
 Such practice isn't security-aware & therefore not recommeded in an Internet environment (see I/O permissions section).
 Instead of installing phpunit, you can just download & use the single PhpUnit package.
 This can be easily done using `cURL`, to get the standalone PhpUnit's phar file:

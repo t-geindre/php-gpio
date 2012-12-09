@@ -103,7 +103,13 @@ pi ALL=NOPASSWD: /path/to/blinker.php
 www-data ALL=NOPASSWD: /path/to/blinker.php
 ```
 
-Create a blinker.php file that contains the php code given in API usage section above.
+Note that you could also have written more pathes:
+
+``` bash
+www-data ALL=NOPASSWD: /path/to/blinker1.php, /path/to/blinker2.php, /path/to/blinker3.php
+```
+
+Now create a blinker.php file that contains the php code given in API usage section above.
 
 Then create a blinkTester.php file that calls the blinker you just created:
 

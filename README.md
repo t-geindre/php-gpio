@@ -85,12 +85,12 @@ API Usage
 Understanding I/O permissions
 -----------------------------
 
-Permissions make sense: it's bad pratice to run Apache2 user as root.
+Permissions make sense: it's bad practice to run Apache2 user as root.
 
 In order to blink a led without exposing you Raspbery Pi to security issues,
-just allow your `www-data` or your `pi` user to run the script that blinks the leds for you:
-To allow  Pi & Apache2 users to run freely the blinker.php file, and only this one,
-edit your `/etc/sudoers` file:
+just allow your `www-data` or your `pi` user to run the blinker.php script that blinks the leds for you.
+
+Edit your `/etc/sudoers` file:
 
 ``` bash
 $ sudo visudo
@@ -102,8 +102,10 @@ Then add this two lines in your `/etc/sudoers` file :
 pi ALL=NOPASSWD: /path/to/blinker.php
 www-data ALL=NOPASSWD: /tmp/php-gpio/blinker.php
 ```
-Create a blinker.php file: See blinker.php code in API usage section in README.md.
-Then create a blinkTester.php file:
+
+Create a blinker.php file that contains the php code given in API usage section above.
+
+Then create a blinkTester.php file that calls the blinker you just created:
 
 ``` php
 <?php
@@ -113,7 +115,7 @@ Then create a blinkTester.php file:
     $result = exec('sudo blinker.php');
 ```
 
-Run your blink tester :
+Run your blink tester code :
 
 ``` bash
 $ php blinkTester.php

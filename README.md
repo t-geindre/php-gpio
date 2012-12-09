@@ -54,6 +54,13 @@ API Usage
 
 ``` php
 <?php
+    
+    # test.php
+    
+    require 'vendor/autoload.php';
+    
+    use PhpGpio\Gpio;
+
     echo "Setting up Pins 17 and 22\n";
     $gpio = new GPIO();
     $gpio->setup(17, "out");

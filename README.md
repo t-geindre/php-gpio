@@ -100,7 +100,7 @@ Then add this two lines in your `/etc/sudoers` file :
 
 ``` bash
 pi ALL=NOPASSWD: /path/to/blinker.php
-www-data ALL=NOPASSWD: /tmp/php-gpio/blinker.php
+www-data ALL=NOPASSWD: /path/to/blinker.php
 ```
 
 Create a blinker.php file that contains the php code given in API usage section above.

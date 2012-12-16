@@ -21,22 +21,11 @@ Installation
 
 The recommended way to install php-gpio is through [composer](http://getcomposer.org).
 
-Just create a `composer.json` file for your project:
-
-``` json
-{
-     "require": {
-        "php": ">=5.3.0",
-        "ronanguilloux/php-gpio": "master-dev"
-    }
-}
-```
-
-And run these two commands to install it:
+Just run these two commands to install it (`curl` needed):
 
 ``` bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project ronanguilloux/php-gpio --dev yourPath 
+$ php composer.phar create-project --stability='dev' ronanguilloux/php-gpio intoYourPath
 ```
 
 Now you can add the autoloader, and you will have access to the library:

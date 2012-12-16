@@ -59,10 +59,11 @@ require_once 'src/autoload.php';
 API Usage
 ---------
 
+The API usage requires sudo permissions.
+To avoid such permissions needs (say, forvApache2 usage), see blinker file and the explanations below.
+
 ``` php
 <?php
-
-    # blinker
 
     require 'vendor/autoload.php';
 
@@ -89,14 +90,15 @@ API Usage
 Understanding I/O permissions
 -----------------------------
 
-Permissions make sense: it's bad practice to run Apache2 user as root.
+Permissions make sense: it's bad practice to run Apache2 user as root, 
+such practice isn't security-aware & therefore not recommeded in an Internet environment.
 
 In order to blink a led without exposing you Raspbery Pi to security issues,
-we provide a simple linker php file, executable from the shell.
+we provide a simple blinker php file, executable from the shell.
 To run this blinker with sudo permissions but without password inputting,
 just allow your `www-data` or your `pi` user to run the blinker script.
-
-With the solution provided below, only one blinker script is needed to manage all the leds, and your webserver application needs only one php file to be specified in /etc/sudoers.
+With the solution provided below, only one blinker script is needed to manage all your leds,
+and your webserver application needs only one php file to be specified in /etc/sudoers.
 
 Edit your `/etc/sudoers` file:
 
@@ -145,7 +147,6 @@ Unit Tests
 ----------
 
 Running the full PhpUnit tests set over php-gpio requires a sudoable user, because of various gpio operations.
-Such practice isn't security-aware & therefore not recommeded in an Internet environment (see I/O permissions section).
 Instead of installing phpunit, you can just download & use the single PhpUnit package.
 This can be easily done using `cURL`, to get the standalone PhpUnit's phar file:
 

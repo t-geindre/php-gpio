@@ -60,7 +60,7 @@ API Usage
 ---------
 
 The API usage requires sudo permissions.
-To avoid such permissions needs (say, forvApache2 usage), see blinker file and the explanations below.
+To avoid such permissions needs (say, for web-related usage), see blinker file and the explanations below.
 
 ``` php
 <?php
@@ -90,7 +90,7 @@ To avoid such permissions needs (say, forvApache2 usage), see blinker file and t
 Understanding I/O permissions
 -----------------------------
 
-Permissions make sense: it's bad practice to run Apache2 user as root, 
+Permissions make sense: it's bad practice to run your webserver user (say, Apache2's www-data) as root, 
 such practice isn't security-aware & therefore not recommeded in an Internet environment.
 
 In order to blink a led without exposing you Raspbery Pi to security issues,

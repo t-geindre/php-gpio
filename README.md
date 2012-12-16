@@ -36,7 +36,7 @@ And run these two commands to install it:
 
 ``` bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar install
+$ php composer.phar create-project ronanguilloux/php-gpio --dev yourPath 
 ```
 
 Now you can add the autoloader, and you will have access to the library:

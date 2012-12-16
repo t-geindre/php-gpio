@@ -62,27 +62,24 @@ API Usage
 ``` php
 <?php
 
-    # blinker.php
+    # blinker
 
     require 'vendor/autoload.php';
 
     use PhpGpio\Gpio;
 
-    echo "Setting up Pins 17 and 22\n";
+    echo "Setting up pin 17\n";
     $gpio = new GPIO();
     $gpio->setup(17, "out");
-    $gpio->setup(22, "out");
 
-    echo "Turning on Pins 17 and 22\n";
+    echo "Turning on pin 17\n";
     $gpio->output(17, 1);
-    $gpio->output(22, 1);
 
     echo "Sleeping!\n";
     sleep(3);
 
-    echo "Turning off Pins 17 and 22\n";
+    echo "Turning off pin 17\n";
     $gpio->output(17, 0);
-    $gpio->output(22, 0);
 
     echo "Unexporting all pins\n";
     $gpio->unexportAll();
@@ -95,7 +92,11 @@ Understanding I/O permissions
 Permissions make sense: it's bad practice to run Apache2 user as root.
 
 In order to blink a led without exposing you Raspbery Pi to security issues,
-just allow your `www-data` or your `pi` user to run the blinker.php script that blinks the leds for you.
+we provide a simple linker php file, executable from the shell.
+To run this blinker with sudo permissions but without password inputting,
+just allow your `www-data` or your `pi` user to run the blinker script.
+
+With the solution provided below, only one blinker script is needed to manage all the leds, and your webserver application needs only one php file to be specified in /etc/sudoers.
 
 Edit your `/etc/sudoers` file:
 
@@ -106,38 +107,30 @@ $ sudo visudo
 Then add this two lines in your `/etc/sudoers` file :
 
 ``` bash
-pi ALL=NOPASSWD: /path/to/blinker.php
-www-data ALL=NOPASSWD: /path/to/blinker.php
+pi ALL=NOPASSWD: /path/to/blinker
+www-data ALL=NOPASSWD: /path/to/blinker
 ```
 
 Note that you could also have written more pathes:
 
 ``` bash
-www-data ALL=NOPASSWD: /path/to/blinker1.php, /path/to/blinker2.php, /path/to/blinker3.php
+myLinuxLogin ALL=NOPASSWD: /path/to/blinker1.php, /path/to/blinker2.php, /path/to/blinker3.php
 ```
 
-Now create a blinker.php file that contains the php code given in API usage section above.
-
-Then create a blinkTester.php file that calls the blinker you just created:
+The blinker file provided is ready to use the API. Just create a blinkTester.php file that calls the blinker.
 
 ``` php
 <?php
 
     # blinkTester.php
-
-    $result = exec('sudo blinker.php');
+    $result = exec('sudo ./blinker 17 20000');
 ```
 
-Run your blink tester code :
+Test your blinker:
 
 ``` bash
 $ php blinkTester.php
 ```
-
-Note that if you call the blinker.php script with appropriate php-cli arguments in the exec() command, by example a gpio-pin ID, 
-and if you extend the blinker.php to manage such commmand-line arguments, 
-then just only one blinker.php script is needed to manage all the leds, 
-and your webserver application needs only one php file to be specified in /etc/sudoers.
 
 
 API Implementations
@@ -163,6 +156,7 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install --dev
 $ sudo /usr/bin/php phpunit.phar
 ```
+
 
 PHP Quality
 -----------

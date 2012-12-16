@@ -1,8 +1,9 @@
+#!/usr/bin/env php
 <?php
 
 # Usage :
 #
-#   $ sudo php blinker.php 17 200000
+#   $ sudo blinker 17 200000
 #
 # = Blink GPIO #17 pin with 0.2 second delay
 

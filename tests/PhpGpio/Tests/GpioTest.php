@@ -43,7 +43,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     public function testSetupWithRightParamaters()
     {
         $this->assertPreconditionOrMarkTestSkipped();
-        foreach($this->hackablePins as $pin) {
+        foreach ($this->hackablePins as $pin) {
             $result = $this->gpio->setup($pin, 'out');
             $this->assertTrue($result instanceof Gpio);
         }
@@ -55,7 +55,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
      */
     public function testOutPutWithRightParametersOn()
     {
-        foreach($this->hackablePins as $pin) {
+        foreach ($this->hackablePins as $pin) {
             $result = $this->gpio->output($pin, 1);
             $this->assertTrue($result instanceof Gpio);
         }
@@ -68,7 +68,7 @@ class GpioTest extends \PhpUnit_Framework_TestCase
     public function testOutPutWithRightParametersOut()
     {
         sleep(1);
-        foreach($this->hackablePins as $pin) {
+        foreach ($this->hackablePins as $pin) {
             $result = $this->gpio->output($pin, 0);
             $this->assertTrue($result instanceof Gpio);
         }

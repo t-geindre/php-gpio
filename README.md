@@ -79,9 +79,12 @@ To avoid such permissions needs (say, for web-related usage), see blinker file a
 Understanding I/O permissions
 -----------------------------
 
-Permissions make sense: it's bad practice to run your webserver user (say, Apache2's www-data) as root, 
-such practice isn't security-aware & therefore not recommeded in an Internet environment.
+Permissions make sense:
+* it's bad practice to run your webserver user (say, Apache2's www-data) as `root`
+* it's bad practice to `chmod 777 /dev` only because someone wants to blink a led freely
 
+Such practices are regularly proposed on RPi forums, but they aren't security-aware & therefore not recommeded in an Internet environment.
+Instead, the good old `/etc/sudoers` file allow your linux users to execute single files with sudo premissions without password to type.
 In order to blink a led without exposing you Raspbery Pi to security issues,
 we provide a simple blinker php file, executable from the shell.
 To run this blinker with sudo permissions but without password inputting,

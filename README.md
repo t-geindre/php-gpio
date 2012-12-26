@@ -117,6 +117,8 @@ The blinker file provided is ready to use the API. Just create a blinkTester.php
 <?php
 
     # blinkTester.php
+    
+    # Blinks the LED wired to the GPIO #17 pin with 0.2 second delay:
     $result = exec('sudo ./blinker 17 20000');
 ```
 

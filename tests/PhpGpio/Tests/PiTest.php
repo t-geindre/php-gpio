@@ -5,7 +5,7 @@ namespace PhpGpio\Tests;
 use PhpGpio\Pi;
 
 /**
- * @author Ronan Guilloux <ronan.guilloux@gmail.com>
+ * @author Ronan Guilloux <ronan.guilloux@gmail.com>, Bas Bloemsaat <bas@bloemsaat.com>
  */
 class PiTest extends \PhpUnit_Framework_TestCase
 {

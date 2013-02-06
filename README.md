@@ -48,8 +48,8 @@ require_once 'src/autoload.php';
 API Usage
 ---------
 
-The API usage requires sudo permissions.
-To avoid such permissions needs (say, for web-related usage), see blinker file and the explanations below.
+The API usage requires sudo permissions.  
+To respect such permissions needs (say, for any web-related usage), see blinker file and the explanations below.
 
 ``` php
 <?php

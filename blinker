@@ -18,7 +18,7 @@ if ('cli' != PHP_SAPI) {
 
 // Am I a sudoer or the root user?
 if ('root' !== $_SERVER['USER'] || empty($_SERVER['SUDO_USER'])) {
-    throw new \Exception("Please run this script as root: sudo phpunit or sudo ./phpunit.phar", $_SERVER['USER']);
+    throw new \Exception("Please run this script as root: sudo phpunit or sudo ./phpunit.phar ; please check the README file");
 }
 
 // Am I using only 2 integer arugments ?
@@ -27,7 +27,7 @@ if (
     || (0 >= (int)($argv[1]))
     || (0 >= (int)($argv[2]))
 ) {
-    throw new \Exception("This script expect 2 positive integer argument");
+    throw new \Exception("This script expect 2 positive integer arguments: please check the README file");
 }
 
 

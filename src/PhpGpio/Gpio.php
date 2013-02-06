@@ -12,8 +12,8 @@ class Gpio
 
     public function __construct()
     {
-        $pi = new Pi;
-       if ($pi->getVersion() < 4) {
+        $raspi = new Pi;
+        if ($raspi->getVersion() < 4) {
             $this->pins = array(
                 0, 1, 4, 7, 8, 9,
                 10, 11, 14, 15, 17, 18,
@@ -22,7 +22,7 @@ class Gpio
             $this->hackablePins = array(
                 4, 17, 18, 21, 22, 23,24, 25
             );
-       } else {
+        } else {
             #new gpio layout: different pins
             $this->pins = array(
                 2, 3, 4, 7, 8, 9,
@@ -32,7 +32,7 @@ class Gpio
             $this->hackablePins = array(
                 4, 17, 18, 22, 23, 24, 25, 27
             );
-       }
+        }
     }
 
     /**

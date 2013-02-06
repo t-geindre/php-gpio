@@ -1,6 +1,11 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
+// Let's test if PHPUnit/Autoload is installed locally
+// (by default in /usr/share/php/PHPUnit).
+// This check allows you to use phpunit.phar alternatively
+if (in_array('phpunit_autoload', spl_autoload_functions())) {
+    require_once 'PHPUnit/Autoload.php';
+}
 
 $rpi = 'raspberrypi';
 if ($rpi !== $nodename = exec('uname --nodename')) {

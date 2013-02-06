@@ -10,7 +10,8 @@ class Gpio
     private $pins;
     private $hackablePins;
 
-    function __construct() {
+    public function __construct()
+    {
         $pi = new Pi;
        if ($pi->getVersion() < 4) {
             $this->pins = array(
@@ -41,7 +42,6 @@ class Gpio
      */
     public function getHackablePins()
     {
-
         return $this->hackablePins;
     }
 

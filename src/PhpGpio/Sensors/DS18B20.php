@@ -66,7 +66,6 @@ class DS18B20 implements SensorInterface
     public function guessBus()
     {
         $busFolders = glob(self::BASEPATH . '*'); // predictable path on a Raspberry Pi
-        $busPath = false;
         if (0 === count($busFolders)) {
             return false;
         }

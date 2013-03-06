@@ -76,7 +76,7 @@ class DS18B20Test extends \PhpUnit_Framework_TestCase
     {
         $this->assertPreconditionOrMarkTestSkipped();
         $result = $this->sensor->guessBus();
-        $this->assertTrue(file_exists($result));
+        $this->assertTrue(file_exists((string)$result));
     }
 
     /**

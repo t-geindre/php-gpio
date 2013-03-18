@@ -24,8 +24,9 @@ The recommended way to install php-gpio is through [composer](http://getcomposer
 Just run these two commands to install it (`curl` needed):
 
 ``` bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project --stability='dev' ronanguilloux/php-gpio intoYourPath
+    $ sudo apt-get install git
+    $ wget http://getcomposer.org/composer.phar
+    $ php composer.phar create-project --stability='dev' ronanguilloux/php-gpio intoYourPath
 ```
 
 Now you can add the autoloader, and you will have access to the library:
@@ -33,7 +34,7 @@ Now you can add the autoloader, and you will have access to the library:
 ``` php
 <?php
 
-require 'vendor/autoload.php';
+    require 'vendor/autoload.php';
 ```
 
 If you don't use neither **Composer** nor a _ClassLoader_ in your application, just require the provided autoloader:
@@ -41,7 +42,7 @@ If you don't use neither **Composer** nor a _ClassLoader_ in your application, j
 ``` php
 <?php
 
-require_once 'src/autoload.php';
+    require_once 'src/autoload.php';
 ```
 
 

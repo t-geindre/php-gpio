@@ -12,10 +12,9 @@ It provides simple tools such as reading & writing to pins.
 tl;dr
 -----
 
-- "I just want to blink a LED from a website interface."
+"Hey, I just want to blink a LED from a website interface."
 
-- "OK: `git clone` the [php-gpio-web](https://github.com/ronanguilloux/php-gpio-web) project inside your Raspberry Pi filesystem.
-
+"OK: `git clone` the [php-gpio-web](https://github.com/ronanguilloux/php-gpio-web) project inside your Raspberry Pi filesystem.  
 Remember to come back here when you're lost ;-)"
 
 
@@ -215,5 +214,6 @@ Credits
 License
 -------
 
-**php-gpio** is released under the MIT License. See the bundled LICENSE file for details.
+**php-gpio** is released under the MIT License.  
+See the bundled LICENSE file for details.  
 You can find a copy of this software here: https://github.com/ronanguilloux/php-gpio

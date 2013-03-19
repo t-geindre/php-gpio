@@ -9,12 +9,13 @@ It provides simple tools such as reading & writing to pins.
 [![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio)
 
 
-TL;DR show me the code
-----------------------
+tl;dr
+-----
 
 "I just want to blink a LED from a website interface."
 
-Ok. Just git clone the [php-gpio-web](https://github.com/ronanguilloux/php-gpio-web) project inside your Raspberry Pi.
+Ok. Check [php-gpio-web](https://github.com/ronanguilloux/php-gpio-web) project inside your Raspberry Pi filesystem.
+Remember to come back here when you're lost ;-)
 
 
 OK, explain it to me please
@@ -27,6 +28,30 @@ to access the CPU by exposing the inputs and outputs.
 
 For further informations about the Raspberry Pi's GPIO capabilities, see docs & schemas at http://elinux.org/RPi_Low-level_peripherals.
 
+
+
+Hardware prerequisites
+----------------------
+
+After having installed & wired your LED & resistor on a breadboard, 
+add appropriate modules from the Linux Kernel:
+
+For LEDs, enable the gpio module :
+
+``` bash
+    $ sudo modprobe w1-gpio
+```
+
+([see a complete circuit diagram for a single LED + explanations & schemas here](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/))
+
+For sensors, enable the appropriate sensor.
+By example for a DS18B20 1-Wire digital temperature sensor:
+
+``` bash
+    $ sudo modprobe w1-therm
+```
+
+([see the DS18B20 in action on a Raspberry Pi here](https://github.com/ronanguilloux/temperature-pi))
 
 Installation
 ------------
@@ -147,8 +172,8 @@ API Implementations
 
 Some php-gpio api examples / demo :
 
-* [Temperature-Pi](https://github.com/ronanguilloux/temperature-pi), a simple php project reading & logging temperatures using a DS18B20 1-Wire digital temperature sensor & this php-gpio library.
-
+* [Temperature-Pi](https://github.com/ronanguilloux/temperature-pi): a simple php project reading & logging temperatures using a DS18B20 1-Wire digital temperature sensor & this php-gpio library.
+* [Php-Gpio-Web](https://github.com/ronanguilloux/php-gpio-web): a website damn simple integration example of the php-gpio lib
 
 Unit Tests
 ----------

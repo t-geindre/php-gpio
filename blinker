@@ -13,21 +13,24 @@ use PhpGpio\Gpio;
 
 // Am i using php-cli?
 if ('cli' != PHP_SAPI) {
-    throw new \Exception("This script must be run using php-cli");
+    echo $msg = "This script must be run using php-cli";
+    throw new \Exception($msg);
 }
 
 // Am I a sudoer or the root user?
 if ('root' !== $_SERVER['USER'] || empty($_SERVER['SUDO_USER'])) {
-    throw new \Exception("Please run this script as root: sudo phpunit or sudo ./phpunit.phar ; please check the README file");
+    echo $msg = "Please run this script as root, using sudo -t ; please check the README file";
+    throw new \Exception($msg);
 }
 
-// Am I using only 2 integer arugments ?
+// Am I using only 2 integer arguments ?
 if (
     !(3 === $argc)
     || (0 >= (int)($argv[1]))
     || (0 >= (int)($argv[2]))
 ) {
-    throw new \Exception("This script expect 2 positive integer arguments: please check the README file");
+    echo $msg = "This script expect 2 positive integer arguments: please check the README file";
+    throw new \Exception($msg);
 }
 
 
@@ -36,7 +39,8 @@ $sleeper = (int)$argv[2];
 $gpio = new GPIO();
 
 if(!in_array($pin, $gpio->getHackablePins())){
-    throw new \InvalidArgumentException("$pin is not a hackable gpio pin number");
+    echo $msg = "$pin is not a hackable gpio pin number";
+    throw new \InvalidArgumentException($msg);
 }
 
 $gpio->setup($pin, "out");

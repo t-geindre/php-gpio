@@ -101,24 +101,19 @@ $ sudo visudo
 
 Then add this two lines in your `/etc/sudoers` file :
 
-``` bash
-pi ALL=NOPASSWD: /path/to/blinker
-www-data ALL=NOPASSWD: /path/to/blinker
+```
+    www-data ALL=NOPASSWD:/path/to/the/blinker
 ```
 
-Note that you could also have written more pathes:
+Replace /pat/to/the/blinker with your project path
 
-``` bash
-myLinuxLogin ALL=NOPASSWD: /path/to/blinker1.php, /path/to/blinker2.php, /path/to/blinker3.php
-```
-
-The blinker file provided is ready to use the API. Just create a blinkTester.php file that calls the blinker.
+The blinker file provided is ready to use the API. You do not need to install apache2-suexec nor suPHP.
 
 ``` php
 <?php
 
     # blinkTester.php
-    
+
     # Blinks the LED wired to the GPIO #17 pin with 0.2 second delay:
     $result = exec('sudo ./blinker 17 20000');
 ```

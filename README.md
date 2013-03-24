@@ -153,7 +153,7 @@ The blinker file provided is ready to use the API. You do not need to install ap
 # blinkTester.php
 
 # Blinks the LED wired to the GPIO #17 pin with 0.2 second delay:
-$result = exec('sudo ./blinker 17 20000');
+$result = exec('sudo -t /usr/bin/php ./blinker 17 20000');
 ```
 
 Test your blinker:

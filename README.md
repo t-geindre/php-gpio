@@ -9,17 +9,17 @@ It provides simple tools such as reading & writing to pins.
 [![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio)
 
 
-tl;dr
+Tl;dr
 -----
 
-"Hey, I just want to blink a LED from a website interface."
+"Hey, I just want to blink a LED from a website interface!"
 
-"OK: `git clone` the [php-gpio-web](https://github.com/ronanguilloux/php-gpio-web) project inside your Raspberry Pi filesystem.  
-Remember to come back here when you're lost ;-)"
+"OK good guy: `git clone` the [php-gpio-web](https://github.com/ronanguilloux/php-gpio-web) project inside your Raspberry Pi filesystem. 
+Follow the minimal instructions given in the related README. Remember to come back here when you're lost ;-)"
 
 
-OK, explain it to me please
----------------------------
+GPIO
+----
 
 General Purpose Input/Output (a.k.a. GPIO) is a generic pin on a chip whose behavior
 (including whether it is an input or output pin) can be controlled (programmed) through software.
@@ -28,6 +28,10 @@ to access the CPU by exposing the inputs and outputs.
 
 For further informations about the Raspberry Pi's GPIO capabilities, see docs & schemas at http://elinux.org/RPi_Low-level_peripherals.
 
+For Raspbeery Pi's GPIO controlling *LEDs*, have a look at a sample complete circuit diagram for a single LED,
+with detailled explanations & schemas, [here](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/).
+
+For Raspbeery Pi's GPIO controlling *sensors*, check the DS18B20 (temperature sensor) in action [here](https://github.com/ronanguilloux/temperature-pi)
 
 
 Hardware prerequisites
@@ -36,7 +40,7 @@ Hardware prerequisites
 After having installed & wired your LED & resistor on a breadboard, 
 add appropriate modules from the Linux Kernel:
 
-For LEDs, enable the gpio module :
+For *LEDs*, enable the gpio module :
 
 ``` bash
 $ sudo modprobe w1-gpio
@@ -44,7 +48,7 @@ $ sudo modprobe w1-gpio
 
 ([see a complete circuit diagram for a single LED + explanations & schemas here](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/))
 
-For sensors, enable the appropriate sensor.
+For *sensors*, enable the appropriate sensor.
 By example for a DS18B20 1-Wire digital temperature sensor:
 
 ``` bash
@@ -121,15 +125,23 @@ Permissions make sense:
 * it's bad practice to run your webserver user (say, Apache2's www-data) as `root`
 * it's bad practice to `chmod 777 /dev` only because someone wants to blink a led freely
 
-Such practices are regularly proposed on RPi forums, but they aren't security-aware & therefore not recommeded in an Internet environment.
-Instead, the good old `/etc/sudoers` file allow your linux users to execute single files with sudo permissions without password to type.
+Such practices are regularly proposed on RPi forums, but they aren't security-aware 
+& therefore not recommeded in an Internet environment.
+Instead, the good old `/etc/sudoers` file allow your linux users to execute single files 
+with sudo permissions without password to type.
+
+
+The blinker file solution ("one-file-to-blink-them-all")
+--------------------------------------------------------
 
 In order to blink a led without exposing you Raspbery Pi to security issues,
-we provide a simple blinker php file, executable from the shell.
+we provide a simple *blinker php file*, executable from the shell.
 To run this blinker with sudo permissions but without password inputting,
 just allow your `www-data` or your `pi` user to run the blinker script.
 With the solution provided below, only one blinker script is needed to manage all your leds,
 and your webserver application needs only one php file to be specified in /etc/sudoers.
+
+This is the regular linux-file-permission-system way to do such things, not a dummy `chmod 777` bullshit.
 
 Edit your `/etc/sudoers` file:
 
@@ -143,9 +155,11 @@ Then add this two lines in your `/etc/sudoers` file :
     www-data ALL=NOPASSWD:/path/to/the/blinker
 ```
 
-Replace /pat/to/the/blinker with your project path
+Replace /path/to/the/blinker with your project path
 
 The blinker file provided is ready to use the API. You do not need to install apache2-suexec nor suPHP.
+
+You can test the blinker file solution with the `blinkerTest.php` file provided here:
 
 ``` php
 <?php

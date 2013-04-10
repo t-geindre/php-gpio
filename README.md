@@ -214,7 +214,7 @@ For [PHP quality fans](http://phpqatools.org), and for my self coding improvemen
 Credits
 -------
 
-* Aaron Pearce, for its [forked pickley/PHP-GPIO project](https://github.com/pickley/PHP-GPIO)
+* Aaron Pearce, for its [forked aaronpearce/PHP-GPIO project](https://github.com/aaronpearce/PHP-GPIO)
 * Ronan Guilloux <ronan.guilloux@gmail.com>
 * Bas Bloemsaat <bas@bloemsaat.com>, Raspberry Pi version dependency
 * [All contributors](https://github.com/ronanguilloux/php-gpio/contributors)

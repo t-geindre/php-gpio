@@ -126,7 +126,7 @@ Permissions make sense:
 * it's bad practice to `chmod 777 /dev` only because someone wants to blink a led freely
 
 Such practices are regularly proposed on RPi forums, but they aren't security-aware 
-& therefore not recommeded in an Internet environment.
+& therefore not recommendable in an Internet environment.
 Instead, the good old `/etc/sudoers` file allow your linux users to execute single files 
 with sudo permissions without password to type.
 

@@ -62,7 +62,7 @@ Installation
 
 The recommended way to install php-gpio is through [composer](http://getcomposer.org).
 
-Just run these three commands to install it (`curl` needed):
+Just run these three commands to install it
 
 ``` bash
 $ sudo apt-get install git

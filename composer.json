@@ -17,4 +17,9 @@
    "autoload": {
         "psr-0": { "PhpGpio": "src/" }
     }
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
 }

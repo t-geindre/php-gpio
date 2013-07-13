@@ -6,8 +6,7 @@ php-gpio
 
 It provides simple tools such as reading & writing to pins.
 
-[![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio)
-[![Total Downloads](https://poser.pugx.org/ronanguilloux/php-gpio/downloads.png)](https://packagist.org/packages/ronanguilloux/php-gpio)
+[![Latest Stable Version](https://poser.pugx.org/ronanguilloux/php-gpio/v/stable.png)](https://packagist.org/packages/ronanguilloux/php-gpio) [![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio) [![Total Downloads](https://poser.pugx.org/ronanguilloux/php-gpio/downloads.png)](https://packagist.org/packages/ronanguilloux/php-gpio)
 
 Tl;dr
 -----

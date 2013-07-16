@@ -11,10 +11,14 @@ It provides simple tools such as reading & writing to pins.
 Tl;dr
 -----
 
-"Hey, I just want to blink a LED from a website interface!"
+```
+- "Hey, I just want to blink a LED from my raspberry pi hosted website!"
+- "OK good guy:  
 
-"OK good guy: `git clone` the [php-gpio-web](https://github.com/ronanguilloux/php-gpio-web) project inside your Raspberry Pi filesystem. 
-Follow the minimal instructions given in the related README. Remember to come back here when you're lost ;-)"
+       pi@raspberrypi:~/sandbox$ git clone https://github.com/ronanguilloux/php-gpio-web.git`
+       
+   Then RTFM (README.md) & STFU, but remember to come back here when you're lost ;-)"
+```
 
 
 GPIO
@@ -30,7 +34,7 @@ For further informations about the Raspberry Pi's GPIO capabilities, see docs & 
 For Raspbeery Pi's GPIO controlling *LEDs*, have a look at a sample complete circuit diagram for a single LED,
 with detailled explanations & schemas, [here](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/).
 
-For Raspbeery Pi's GPIO controlling *sensors*, check the DS18B20 (temperature sensor) in action [here](https://github.com/ronanguilloux/temperature-pi)
+For Raspbeery Pi's GPIO controlling *sensors*, check the [DS18B20 (temperature sensor)](http://learn.adafruit.com/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing/overview) in action [here](https://github.com/ronanguilloux/temperature-pi)
 
 
 Hardware prerequisites
@@ -48,7 +52,7 @@ $ sudo modprobe w1-gpio
 ([see a complete circuit diagram for a single LED + explanations & schemas here](https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/))
 
 For *sensors*, enable the appropriate sensor.
-By example for a DS18B20 1-Wire digital temperature sensor:
+By example for a [DS18B20 1-Wire digital temperature sensor](http://learn.adafruit.com/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing/overview):
 
 ``` bash
 $ sudo modprobe w1-therm

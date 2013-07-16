@@ -13,12 +13,14 @@ Tl;dr
 
 ```
 - "Hey, I just want to blink a LED from my raspberry pi hosted website!"
-- "OK good guy:  
+- "OK good guy:
 
        pi@raspberrypi:~/sandbox$ git clone https://github.com/ronanguilloux/php-gpio-web.git`
        
    Then RTFM (README.md) & STFU, but remember to come back here when you're lost ;-)"
 ```
+
+=> [php-gpio-web: a simple example for you to play with Leds & PHP](https://github.com/ronanguilloux/php-gpio-web)
 
 
 GPIO

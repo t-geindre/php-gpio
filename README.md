@@ -62,6 +62,14 @@ $ sudo modprobe w1-therm
 
 ([see the DS18B20 in action on a Raspberry Pi here](https://github.com/ronanguilloux/temperature-pi))
 
+To load such kernel modules automatically at boot time, edit the `/etc/modules` file & add these two lines:
+
+```
+w1-gpio
+w1-therm
+```
+
+
 Installation
 ------------
 

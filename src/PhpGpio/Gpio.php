@@ -2,9 +2,7 @@
 
 namespace PhpGpio;
 
-use PhpGpio\Pi;
-
-class Gpio
+class Gpio implements GpioInterface
 {
     // Using BCM pin numbers.
     private $pins;
@@ -46,11 +44,13 @@ class Gpio
     }
 
     private $directions = array(
-        'in', 'out'
+        GpioInterface::DIRECTION_IN,
+        GpioInterface::DIRECTION_OUT,
     );
 
     private $outputs = array(
-        0, 1
+        GpioInterface::IO_VALUE_ON,
+        GpioInterface::IO_VALUE_OFF,
     );
 
     // exported pins for when we unexport all

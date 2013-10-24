@@ -101,7 +101,7 @@ class Gpio implements GpioInterface
         }
         if ($this->isExported($pinNo)) {
             if ($this->currentDirection($pinNo) != "out") {
-                return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value');
+                return trim(file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value'));
             }
             throw new \Exception('Error!' . $this->currentDirection($pinNo) . ' is a wrong direction for this pin!');
         }
@@ -196,7 +196,7 @@ class Gpio implements GpioInterface
             return false;
         }
 
-        return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/direction');
+        return trim(file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/direction'));
     }
 
     /**

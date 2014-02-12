@@ -38,4 +38,41 @@ class PiTest extends \PhpUnit_Framework_TestCase
 
     }
 
+    public function testGetCpuLoad()
+    {
+        $this->assertPreconditionOrMarkTestSkipped();
+        $this->assertTrue($this->pi instanceof Pi);
+        $result = $this->pi->getCpuLoad();
+        $this->assertTrue(is_array($result));
+        $this->assertCount(3, $result);
+
+    }
+
+    public function testGetCpuTemp()
+    {
+        $this->assertPreconditionOrMarkTestSkipped();
+        $this->assertTrue($this->pi instanceof Pi);
+        $result = $this->pi->getCpuTemp();
+        $this->assertInternalType('float' , $result);
+
+    }
+
+    public function testGetGpuTemp()
+    {
+        $this->assertPreconditionOrMarkTestSkipped();
+        $this->assertTrue($this->pi instanceof Pi);
+        $result = $this->pi->getGpuTemp();
+        $this->assertInternalType('float' , $result);
+
+    }
+
+    public function testGetCpuFrequence()
+    {
+        $this->assertPreconditionOrMarkTestSkipped();
+        $this->assertTrue($this->pi instanceof Pi);
+        $result = $this->pi->getCpuFrequency();
+        $this->assertInternalType('float' , $result);
+
+    }
+
 }

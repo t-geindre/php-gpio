@@ -2,9 +2,7 @@
 
 namespace PhpGpio;
 
-use PhpGpio\Pi;
-
-class Gpio
+class Gpio implements GpioInterface
 {
     // Using BCM pin numbers.
     private $pins;
@@ -46,11 +44,13 @@ class Gpio
     }
 
     private $directions = array(
-        'in', 'out'
+        GpioInterface::DIRECTION_IN,
+        GpioInterface::DIRECTION_OUT,
     );
 
     private $outputs = array(
-        0, 1
+        GpioInterface::IO_VALUE_ON,
+        GpioInterface::IO_VALUE_OFF,
     );
 
     // exported pins for when we unexport all
@@ -101,7 +101,7 @@ class Gpio
         }
         if ($this->isExported($pinNo)) {
             if ($this->currentDirection($pinNo) != "out") {
-                return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value');
+                return trim(file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value'));
             }
             throw new \Exception('Error!' . $this->currentDirection($pinNo) . ' is a wrong direction for this pin!');
         }
@@ -196,7 +196,7 @@ class Gpio
             return false;
         }
 
-        return file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/direction');
+        return trim(file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/direction'));
     }
 
     /**

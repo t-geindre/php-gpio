@@ -15,4 +15,36 @@ class Pi
 
         return 0;
     }
+	
+    public function getCpuLoad()
+    {
+        return sys_getloadavg();
+    }
+	
+    public function getCpuTemp($fahrenheit = false)
+    {
+        $cputemp = floatval(file_get_contents('/sys/class/thermal/thermal_zone0/temp'))/1000;
+		
+		if($fahrenheit)
+			$cputemp = 1.8* $cputemp+32;
+		
+        return $cputemp;
+    }
+	
+    public function getGpuTemp($fahrenheit = false)
+    {
+        $gputemp = floatval(str_replace(array('temp=', '\'C'), '', exec('/opt/vc/bin/vcgencmd measure_temp')));
+		
+		if($fahrenheit)
+			$gputemp = 1.8* $gputemp+32;
+
+        return $gputemp;
+    }
+	
+    public function getCpuFrequency()
+    {
+        $frequency = floatval(file_get_contents('/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq'))/1000;
+		
+        return $frequency;
+    }
 }

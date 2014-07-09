@@ -15,6 +15,10 @@ interface GpioInterface
     const IO_VALUE_ON = 1;
     const IO_VALUE_OFF = 0;
 
+    const PATH_GPIO = '/sys/class/gpio/gpio';
+    const PATH_EXPORT = '/sys/class/gpio/export';
+    const PATH_UNEXPORT = '/sys/class/gpio/unexport';
+
     /**
      * getHackablePins : the pins you can hack with.
      * @link http://elinux.org/RPi_Low-level_peripherals

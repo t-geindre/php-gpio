@@ -75,11 +75,11 @@ class Gpio implements GpioInterface
         }
 
         // Export pin
-        file_put_contents('/sys/class/gpio/export', $pinNo);
+        file_put_contents(GpioInterface::PATH_EXPORT, $pinNo);
 
         // if valid direction then set direction
         if ($this->isValidDirection($direction)) {
-            file_put_contents('/sys/class/gpio/gpio'.$pinNo.'/direction', $direction);
+            file_put_contents(GpioInterface::PATH_GPIO.$pinNo.'/direction', $direction);
         }
 
         // Add to exported pins array
@@ -101,7 +101,7 @@ class Gpio implements GpioInterface
         }
         if ($this->isExported($pinNo)) {
             if ($this->currentDirection($pinNo) != "out") {
-                return trim(file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/value'));
+                return trim(file_get_contents(GpioInterface::PATH_GPIO.$pinNo.'/value'));
             }
             throw new \Exception('Error!' . $this->currentDirection($pinNo) . ' is a wrong direction for this pin!');
         }
@@ -126,7 +126,7 @@ class Gpio implements GpioInterface
         }
         if ($this->isExported($pinNo)) {
             if ($this->currentDirection($pinNo) != "in") {
-                file_put_contents('/sys/class/gpio/gpio'.$pinNo.'/value', $value);
+                file_put_contents(GpioInterface::PATH_GPIO.$pinNo.'/value', $value);
             } else {
                 throw new \Exception('Error! Wrong Direction for this pin! Meant to be out while it is ' . $this->currentDirection($pinNo));
             }
@@ -147,7 +147,7 @@ class Gpio implements GpioInterface
             return false;
         }
         if ($this->isExported($pinNo)) {
-            file_put_contents('/sys/class/gpio/unexport', $pinNo);
+            file_put_contents(GpioInterface::PATH_UNEXPORT, $pinNo);
             foreach ($this->exportedPins as $key => $value) {
                 if($value == $pinNo) unset($key);
             }
@@ -164,7 +164,7 @@ class Gpio implements GpioInterface
     public function unexportAll()
     {
         foreach ($this->exportedPins as $pinNo) {
-            file_put_contents('/sys/class/gpio/unexport', $pinNo);
+            file_put_contents(GpioInterface::PATH_UNEXPORT, $pinNo);
         }
         $this->exportedPins = array();
 
@@ -182,7 +182,7 @@ class Gpio implements GpioInterface
             return false;
         }
 
-        return file_exists('/sys/class/gpio/gpio'.$pinNo);
+        return file_exists(GpioInterface::PATH_GPIO.$pinNo);
     }
 
     /**
@@ -196,7 +196,7 @@ class Gpio implements GpioInterface
             return false;
         }
 
-        return trim(file_get_contents('/sys/class/gpio/gpio'.$pinNo.'/direction'));
+        return trim(file_get_contents(GpioInterface::PATH_GPIO.$pinNo.'/direction'));
     }
 
     /**

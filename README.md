@@ -6,7 +6,7 @@ php-gpio
 
 It provides simple tools such as reading & writing to pins.
 
-[![Latest Stable Version](https://poser.pugx.org/ronanguilloux/php-gpio/v/stable.png)](https://packagist.org/packages/ronanguilloux/php-gpio) [![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ronanguilloux/php-gpio/badges/quality-score.png?s=199e653b7ec9627593843ba15c961f9c0be7701d)](https://scrutinizer-ci.com/g/ronanguilloux/php-gpio/) [![Total Downloads](https://poser.pugx.org/ronanguilloux/php-gpio/downloads.png)](https://packagist.org/packages/ronanguilloux/php-gpio)
+[![Latest Stable Version](https://poser.pugx.org/ronanguilloux/php-gpio/v/stable.png)](https://packagist.org/packages/ronanguilloux/php-gpio) [![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ronanguilloux/php-gpio/badges/quality-score.png?s=199e653b7ec9627593843ba15c961f9c0be7701d)](https://scrutinizer-ci.com/g/ronanguilloux/php-gpio/) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/fde42adb-344d-4055-b78d-20b598040ac8/mini.png)](https://insight.sensiolabs.com/projects/fde42adb-344d-4055-b78d-20b598040ac8) [![Total Downloads](https://poser.pugx.org/ronanguilloux/php-gpio/downloads.png)](https://packagist.org/packages/ronanguilloux/php-gpio)
 
 Tl;dr
 -----

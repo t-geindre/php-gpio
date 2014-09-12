@@ -18,10 +18,10 @@ class Gpio implements GpioInterface
                 21, 22, 23, 24, 25
             );
             $this->hackablePins = array(
-                4, 17, 18, 21, 22, 23,24, 25
+                4, 17, 18, 21, 22, 23, 24, 25
             );
-        } else {
-            #new gpio layout: different pins
+        } else if($raspi->getVersion() < 16) {
+            # new GPIO layout (REV2)
             $this->pins = array(
                 2, 3, 4, 7, 8, 9,
                 10, 11, 14, 15, 17, 18,
@@ -30,7 +30,17 @@ class Gpio implements GpioInterface
             $this->hackablePins = array(
                 4, 17, 18, 22, 23, 24, 25, 27
             );
-        }
+        } else {
+	    # new GPIO layout (B+)
+	    $this->pins = array(
+                2, 3, 4, 5, 6, 7,
+                8, 9, 10, 11, 12, 13,
+                14, 15, 16, 17, 18, 19,
+                20, 21, 22, 23, 24, 25,
+                26, 27
+	    );
+	    $this->hackablePins = array();
+	}
     }
 
     /**

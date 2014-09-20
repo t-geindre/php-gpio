@@ -147,12 +147,20 @@ with sudo permissions without password to type.
 The blinker file solution ("one-file-to-blink-them-all")
 --------------------------------------------------------
 
-In order to blink a led without exposing you Raspbery Pi to security issues,
-we provide a simple *blinker php file*, executable from the shell.
-To run this blinker with sudo permissions but without password inputting,
-just allow your `www-data` or your `pi` user to run the blinker script.
+In a PHP-based project, the API can only be used with sudo permissions. But there is a solution to avoid exposing your Raspbery Pi to security issues : Preparing & packaging inside an API client, in a single PHP file, all the GPIO operations you need to run. In a hardware-based project, such operations are usualy few in number: blink a led, run a servomotor, etc. Such single PHP file containing your GPIO-related action can be called with determinated parameters from within your web-based application using `exec()` command : 
+
+```php
+(...)
+$result = exec('sudo -t /usr/bin/php ./blinker 17 20000'); // calling the API client file
+(...)
+```
+
+Such one-single PHP file to act as an API client for one GPIO action makes easier to configure specific sudo permissions in your `/etc/sudoers` file, as you'll see below. If you have more hardware operations to run (say, a LED + a servomotor + 2-3 sensors), more dedicated API client files, with their own parameters, is also very OK.
+
+As an example of such solution, we provide a simple *blinker php file*, executable from the shell & from within your web based app. To run this blinker with sudo permissions but without password inputting,
+just allow your `www-data` or your `pi` user to run the blinker script using `exec()`.
 With the solution provided below, only one blinker script is needed to manage all your leds,
-and your webserver application needs only one php file to be specified in /etc/sudoers.
+and your webserver application needs only one php file to be specified in `/etc/sudoers`.
 
 This is the regular linux-file-permission-system way to do such things, not a dummy `chmod 777` bullshit.
 
@@ -168,9 +176,9 @@ Then add this two lines in your `/etc/sudoers` file :
     www-data ALL=NOPASSWD:/path/to/the/blinker
 ```
 
-Replace /path/to/the/blinker with your project path
+Replace `/path/to/the/blinker` with your single API client PHP file.
 
-The blinker file provided is ready to use the API. You do not need to install apache2-suexec nor suPHP.
+The blinker file provided now has the sufficient permissions & is ready to use the GPIO API. You do not need to install apache2-suexec nor suPHP.
 
 You can test the blinker file solution with the `blinkerTest.php` file provided here:
 

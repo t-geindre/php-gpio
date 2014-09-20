@@ -147,7 +147,7 @@ with sudo permissions without password to type.
 The blinker file solution ("one-file-to-blink-them-all")
 --------------------------------------------------------
 
-In a PHP-based project, the API can only be used with sudo permissions. But there is a solution to avoid exposing your Raspbery Pi to security issues : Preparing & packaging inside an API client, in a single PHP file, all the GPIO operations you need to run. In a hardware-based project, such operations are usualy few in number: blink a led, run a servomotor, etc. Such single PHP file containing your GPIO-related action can be called with determinated parameters from within your web-based application using `exec()` command : 
+In a PHP-based project, the API can only be used with sudo permissions. But there is a solution to avoid exposing your Raspbery Pi to security issues : Preparing & packaging inside an API client, in a single PHP file, the GPIO operation you need to run. In a hardware-based project, such operations are usualy few in number: blink a led, run a servomotor, etc. Such single PHP file containing your GPIO-related action can be called with determinated parameters from within your web-based application using `exec()` command : 
 
 ```php
 (...)

@@ -4,6 +4,15 @@ namespace PhpGpio;
 
 class Pi
 {
+    /**
+     * 
+     * Get RaspberryPi version
+     * 
+     * A list of Model and Pi Revision & Hardware Revision Code from '/proc/cpuinfo' is here: 
+     * @link http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+     * 
+     * @return decimal Raspi version
+     */
     public function getVersion()
     {
         $cpuinfo = preg_split ("/\n/", file_get_contents('/proc/cpuinfo'));

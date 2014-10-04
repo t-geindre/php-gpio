@@ -8,16 +8,17 @@ It provides simple tools such as reading & writing to pins.
 
 [![Latest Stable Version](https://poser.pugx.org/ronanguilloux/php-gpio/v/stable.png)](https://packagist.org/packages/ronanguilloux/php-gpio) [![Build Status](https://secure.travis-ci.org/ronanguilloux/php-gpio.png?branch=master)](http://travis-ci.org/ronanguilloux/php-gpio) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ronanguilloux/php-gpio/badges/quality-score.png?s=199e653b7ec9627593843ba15c961f9c0be7701d)](https://scrutinizer-ci.com/g/ronanguilloux/php-gpio/) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/fde42adb-344d-4055-b78d-20b598040ac8/mini.png)](https://insight.sensiolabs.com/projects/fde42adb-344d-4055-b78d-20b598040ac8) [![Total Downloads](https://poser.pugx.org/ronanguilloux/php-gpio/downloads.png)](https://packagist.org/packages/ronanguilloux/php-gpio)
 
+![Circuit snapshot](https://raw.github.com/ronanguilloux/temperature-pi/master/resources/images/mounting.jpg)
+
+[UPDATE Fall 2014] Now compatible with both Raspberry Pi **B Model & B+ Revision**
+
 Tl;dr
 -----
 
 ```
 - "Hey, I just want to blink a LED from my raspberry pi hosted website!"
-- "OK good guy:
-
-       pi@raspberrypi:~/sandbox$ git clone https://github.com/ronanguilloux/php-gpio-web.git`
-       
-   Then RTFM (README.md) & STFU, but remember to come back here when you're lost ;-)"
+- "OK good guy: git clone https://github.com/ronanguilloux/php-gpio-web.git`
+   & remember to come back here when you're lost ;-)"
 ```
 
 => [php-gpio-web: a simple example for you to play with Leds & PHP](https://github.com/ronanguilloux/php-gpio-web)

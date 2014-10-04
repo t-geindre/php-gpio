@@ -239,6 +239,7 @@ Credits
 * Aaron Pearce, for its [forked aaronpearce/PHP-GPIO project](https://github.com/aaronpearce/PHP-GPIO)
 * Ronan Guilloux <ronan.guilloux@gmail.com>
 * Bas Bloemsaat <bas@bloemsaat.com>, Raspberry Pi version dependency
+* Alex Ciarlillo (@alexciarlillo), Raspberry Pi B+ revision support
 * [All contributors](https://github.com/ronanguilloux/php-gpio/contributors)
 
 

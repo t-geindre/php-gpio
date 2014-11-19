@@ -8,6 +8,9 @@ class Gpio implements GpioInterface
     private $pins;
     private $hackablePins;
 
+    /**
+     * @link http://www.raspberrypi-spy.co.uk/2012/06/simple-guide-to-the-rpi-gpio-header-and-pins/
+     */
     public function __construct()
     {
         $raspi = new Pi;
@@ -18,7 +21,9 @@ class Gpio implements GpioInterface
                 21, 22, 23, 24, 25
             );
             $this->hackablePins = array(
-                4, 17, 18, 21, 22, 23, 24, 25
+                4, 7, 8, 9,
+                10, 11, 17, 18,
+                21, 22, 23, 24, 25
             );
         } else if($raspi->getVersion() < 16) {
             # new GPIO layout (REV2)
@@ -28,19 +33,25 @@ class Gpio implements GpioInterface
                 22, 23, 24, 25, 27
             );
             $this->hackablePins = array(
-                4, 17, 18, 22, 23, 24, 25, 27
+                4, 7, 8, 9,
+                10, 11, 17, 18,
+                22, 23, 24, 25, 27
             );
         } else {
-	    # new GPIO layout (B+)
-	    $this->pins = array(
+            # new GPIO layout (B+)
+            $this->pins = array(
                 2, 3, 4, 5, 6, 7,
                 8, 9, 10, 11, 12, 13,
                 14, 15, 16, 17, 18, 19,
                 20, 21, 22, 23, 24, 25,
                 26, 27
-	    );
-	    $this->hackablePins = array();
-	}
+            );
+            $this->hackablePins = array(
+                4, 5, 6
+                12, 13, 16, 17, 18, 19,
+                20, 21, 22, 23, 24, 25, 26, 27
+            );
+        }
     }
 
     /**

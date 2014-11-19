@@ -57,7 +57,7 @@ class Gpio implements GpioInterface
     /**
      * getHackablePins : the pins you can hack with.
      * @link http://elinux.org/RPi_Low-level_peripherals
-     * @return array
+     * @return integer[]
      */
     public function getHackablePins()
     {
@@ -113,7 +113,7 @@ class Gpio implements GpioInterface
      * Get input value
      *
      * @param  int   $pinNo
-     * @return mixed string GPIO value or boolean false
+     * @return false|string string GPIO value or boolean false
      */
     public function input($pinNo)
     {
@@ -180,7 +180,7 @@ class Gpio implements GpioInterface
     /**
      * Unexport all pins
      *
-     * @return mixed Gpio current instance or boolean false
+     * @return Gpio Gpio current instance or boolean false
      */
     public function unexportAll()
     {
@@ -209,7 +209,7 @@ class Gpio implements GpioInterface
     /**
      * get the pin's current direction
      *
-     * @return mixed string pin's direction value or boolean false
+     * @return false|string string pin's direction value or boolean false
      */
     public function currentDirection($pinNo)
     {

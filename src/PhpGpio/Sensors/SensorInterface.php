@@ -12,7 +12,7 @@ interface SensorInterface
      * Read
      *
      * @param array $args
-     * @return $value
+     * @return double
      */
     public function read($args = array());
 

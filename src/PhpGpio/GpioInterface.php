@@ -33,7 +33,7 @@ interface GpioInterface
      * @param  int    $pinNo
      * @param  string $direction
      *
-     * @return mixed string GPIO value or boolean false
+     * @return GpioDevelop string GPIO value or boolean false
      */
     public function setup($pinNo, $direction);
 
@@ -42,7 +42,7 @@ interface GpioInterface
      *
      * @param  int   $pinNo
      *
-     * @return mixed string GPIO value or boolean false
+     * @return integer string GPIO value or boolean false
      */
     public function input($pinNo);
 
@@ -52,7 +52,7 @@ interface GpioInterface
      * @param  int    $pinNo
      * @param  string $value
      *
-     * @return mixed Gpio current instance or boolean false
+     * @return GpioDevelop Gpio current instance or boolean false
      */
     public function output($pinNo, $value);
 
@@ -61,14 +61,14 @@ interface GpioInterface
      *
      * @param  int $pinNo
      *
-     * @return mixed Gpio current instance or boolean false
+     * @return GpioDevelop Gpio current instance or boolean false
      */
     public function unexport($pinNo);
 
     /**
      * Unexport all pins
      *
-     * @return mixed Gpio current instance or boolean false
+     * @return GpioDevelop Gpio current instance or boolean false
      */
     public function unexportAll();
 
@@ -86,7 +86,7 @@ interface GpioInterface
      *
      * @param int $pinNo
      *
-     * @return mixed string pin's direction value or boolean false
+     * @return string string pin's direction value or boolean false
      */
     public function currentDirection($pinNo);
 

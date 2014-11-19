@@ -45,7 +45,6 @@ class DS18B20 implements SensorInterface
     /**
      * Setup
      *
-     * @param array $args
      * @return $this
      */
     public function __construct()
@@ -96,7 +95,7 @@ class DS18B20 implements SensorInterface
      * Write
      *
      * @param array $args
-     * @return $this
+     * @return boolean
      */
     public function write($args = array())
     {

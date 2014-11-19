@@ -47,7 +47,7 @@ class Gpio implements GpioInterface
                 26, 27
             );
             $this->hackablePins = array(
-                4, 5, 6
+                4, 5, 6,
                 12, 13, 16, 17, 18, 19,
                 20, 21, 22, 23, 24, 25, 26, 27
             );

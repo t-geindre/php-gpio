@@ -2,8 +2,6 @@
 
 namespace PhpGpio\Sensors;
 
-use PhpGpio\Gpio;
-
 /**
  * The MCP3002 has a 10-bit analog to digital converter (ADC) with a simple to use SPI interface.
  *
@@ -50,7 +48,7 @@ class MCP3002 implements SensorInterface {
      * You should specify the channel (0|1) to read with the <tt>channel</tt> argument.
      *
      * @param array $args
-     * @return double
+     * @return integer
      */
     public function read($args = array()) {
         $channel = $args['channel'];

@@ -30,8 +30,8 @@ interface GpioInterface
     /**
      * Setup pin, takes pin number and direction (in or out)
      *
-     * @param  int    $pinNo
-     * @param  string $direction
+     * @param int    $pinNo
+     * @param string $direction
      *
      * @return GpioDevelop string GPIO value or boolean false
      */
@@ -40,7 +40,7 @@ interface GpioInterface
     /**
      * Get input value
      *
-     * @param  int   $pinNo
+     * @param int $pinNo
      *
      * @return integer string GPIO value or boolean false
      */
@@ -49,8 +49,8 @@ interface GpioInterface
     /**
      * Set output value
      *
-     * @param  int    $pinNo
-     * @param  string $value
+     * @param int    $pinNo
+     * @param string $value
      *
      * @return GpioDevelop Gpio current instance or boolean false
      */
@@ -59,7 +59,7 @@ interface GpioInterface
     /**
      * Unexport Pin
      *
-     * @param  int $pinNo
+     * @param int $pinNo
      *
      * @return GpioDevelop Gpio current instance or boolean false
      */

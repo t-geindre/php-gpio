@@ -7,14 +7,13 @@ namespace PhpGpio\Sensors;
  */
 interface SensorInterface
 {
-
     /**
      * Read
      *
      * @param array $args
      * @return double
      */
-    public function read($args = array());
+    public function read(array $args = []);
 
     /**
      * Write
@@ -22,6 +21,5 @@ interface SensorInterface
      * @param array $args
      * @return $this
      */
-    public function write($args = array());
-
+    public function write(array $args = []);
 }

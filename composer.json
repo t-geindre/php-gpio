@@ -1,25 +1,24 @@
 {
-    "name": "ronanguilloux/php-gpio",
+    "name": "tgeindre/php-gpio",
     "type": "library",
     "description": "GPIO-related utils & toolkit PHP library",
     "keywords": ["GPIO", "hardware", "chipset", "input", "output", "port", "pin", "chip", "sensors", "raspberry", "raspberry pi"],
-    "homepage": "https://github.com/ronanguilloux/php-gpio",
+    "homepage": "https://github.com/t-geindre/php-gpio",
     "license": "MIT",
     "authors": [
         {
-            "name": "Ronan Guilloux",
-            "email": "ronan.guilloux@gmail.com"
+            "name": "Thierry Geindre"
         }
     ],
    "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.6.0"
     },
    "autoload": {
         "psr-0": { "PhpGpio": "src/" }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
+    "require-dev": {
+        "m6web/symfony2-coding-standard": "^3.3",
+        "m6web/coke": "^2.1"
     }
 }
+

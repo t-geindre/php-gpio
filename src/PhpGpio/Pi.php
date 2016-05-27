@@ -54,34 +54,4 @@ class Pi
 
         return $cputemp;
     }
-
-    /**
-     * Get GPU temp
-     *
-     * @param boolean $fahrenheit
-     *
-     * @return float
-     */
-    public function getGpuTemp($fahrenheit = false)
-    {
-        $gputemp = floatval(str_replace(array('temp=', '\'C'), '', exec('/opt/vc/bin/vcgencmd measure_temp')));
-
-        if ($fahrenheit) {
-            $gputemp = 1.8* $gputemp+32;
-        }
-
-        return $gputemp;
-    }
-
-    /**
-     * Get CPU frequency
-     *
-     * @return float
-     */
-    public function getCpuFrequency()
-    {
-        $frequency = floatval(file_get_contents('/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq'))/1000;
-
-        return $frequency;
-    }
 }

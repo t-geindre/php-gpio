@@ -81,10 +81,9 @@ class Gpio implements GpioInterface
      */
     public function setup($pinNo, $direction)
     {
-        $this->isValidPin($pinNo);
         $this->isValidDirection($direction);
 
-        if ($this->isExported($pinNo)) {
+        if ($this->isExported($pinNo, false)) {
             $this->unexport($pinNo);
         }
 
@@ -116,7 +115,7 @@ class Gpio implements GpioInterface
         }
 
         throw new \RuntimeException(
-            sprintf('Wrong direction "%s", "%s" expected', $this->currentDirection($pinNo), GpioInterface::DIRECTION_OUT);
+            sprintf('Wrong direction "%s", "%s" expected', $this->currentDirection($pinNo), GpioInterface::DIRECTION_OUT)
         );
     }
 
@@ -136,11 +135,11 @@ class Gpio implements GpioInterface
         if ($this->currentDirection($pinNo) != GpioInterface::DIRECTION_IN) {
             file_put_contents(GpioInterface::PATH_GPIO.$pinNo.'/value', $value);
 
-            return $this
+            return $this;
         }
 
         throw new \RuntimeException(
-            sprintf('Wrong direction "%s", "%s" expected', $this->currentDirection($pinNo), GpioInterface::DIRECTION_IN);
+            sprintf('Wrong direction "%s", "%s" expected', $this->currentDirection($pinNo), GpioInterface::DIRECTION_IN)
         );
     }
 
@@ -183,15 +182,28 @@ class Gpio implements GpioInterface
      * Check if pin is exported
      *
      * @param integer $pinNo
+     * @param boolean $throwExceptions
      *
      * @return boolean
      */
-    public function isExported($pinNo)
+    public function isExported($pinNo, $throwExceptions = true)
     {
         $this->isValidPin($pinNo);
 
         if (!file_exists(GpioInterface::PATH_GPIO.$pinNo)) {
-            throw new \RuntimeException('Pin "'.$pinNo'" not expoted');
+            if (!$throwExceptions) {
+                return false;
+            }
+            throw new \RuntimeException(sprintf('Pin "%s" not exported', $pinNo));
+        }
+
+        if (!isset($this->pins[$pinNo]) || !$this->pins[$pinNo]) {
+            if (!$throwExceptions) {
+                return false;
+            }
+            throw new \RuntimeException(
+                sprintf('Pin "%s" exported but not managed by this instance', $pinNo)
+            );
         }
 
         return true;
@@ -223,9 +235,12 @@ class Gpio implements GpioInterface
         if (!is_string($direction) || empty($direction)) {
             throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (string expected).', $direction));
         }
+
         if (!in_array($direction, $this->directions)) {
             throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (unknown direction).', $direction));
         }
+
+        return true;
     }
 
     /**
@@ -240,9 +255,12 @@ class Gpio implements GpioInterface
         if (!is_int($output)) {
             throw new \InvalidArgumentException(sprintf('Pin value "%s" is invalid (integer expected).', $output));
         }
+
         if (!in_array($output, $this->outputs)) {
             throw new \InvalidArgumentException(sprintf('Output value "%s" is invalid (out of exepected range).', $output));
         }
+
+        return true;
     }
 
     /**
@@ -261,5 +279,7 @@ class Gpio implements GpioInterface
         if (!in_array($pinNo, $this->pins)) {
             throw new \InvalidArgumentException(sprintf('Pin number "%s" is invalid (out of exepected range).', $pinNo));
         }
+
+        return true;
     }
 }

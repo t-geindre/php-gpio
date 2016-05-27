@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "m6web/symfony2-coding-standard": "^3.3",
-        "m6web/coke": "^2.1"
+        "m6web/coke": "^2.1",
+        "atoum/atoum": "^2.7"
     }
 }
-

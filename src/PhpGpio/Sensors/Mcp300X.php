@@ -36,10 +36,15 @@ class Mcp300X implements SensorInterface
     protected $gpio;
 
     /**
+     * @var integer
+     */
+    protected $channelsCount;
+
+    /**
      * Define channels count to match your MCP version :
      * - 2 channels for MCP3002
+     * - 4 channels for MCP3004
      * - 8 channels for MCP3008
-     * and so on...
      *
      * @param GpioInterface $gpio          Gpio instance
      * @param integer       $clockpin      The clock (CLK) pin (ex. 11)
@@ -51,6 +56,7 @@ class Mcp300X implements SensorInterface
     public function __construct(GpioInterface $gpio, $clockpin, $mosipin, $misopin, $cspin, $channelsCount = 2)
     {
         $this->gpio = $gpio;
+        $this->channelsCount = $channelsCount;
 
         $this->clockPin = $clockpin;
         $this->mosiPin = $mosipin;
@@ -74,9 +80,10 @@ class Mcp300X implements SensorInterface
     public function read($args = [])
     {
         $channel = $args['channel'];
-        if (!is_integer($channel) || !in_array($channel, [0, 1])) {
-            echo $msg = "Only 2 channels are available on a Mcp3002: 0 or 1";
-            throw new \InvalidArgumentException($msg);
+        if (!is_integer($channel) || $channel < 0 || $channel > $this->channelsCount - 1) {
+            throw new \InvalidArgumentException(
+                sprintf('Only %s channels are available on a Mcp300%s', $this->channelsCount, $this->channelsCount)
+            );
         }
 
         // init comm
@@ -118,6 +125,6 @@ class Mcp300X implements SensorInterface
      */
     public function write($args = [])
     {
-        throw new \RuntimeException('MCP components are not writable');
+        throw new \RuntimeException('Component not writable');
     }
 }

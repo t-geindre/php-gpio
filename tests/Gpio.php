@@ -104,7 +104,9 @@ class Gpio extends atoum
     {
         $this
             ->given(
-                $testedInstance = $this->newTestedInstance,
+                $testedInstance = $this->newTestedInstance(
+                    $this->getPiMock()
+                ),
                 $invalidPin = -1,
                 $data = 'foo'
             )

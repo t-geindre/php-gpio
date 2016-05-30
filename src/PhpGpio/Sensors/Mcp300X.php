@@ -2,7 +2,6 @@
 
 namespace PhpGpio\Sensors;
 
-use PhpGpio\Gpio;
 use PhpGpio\GpioInterface;
 
 /**
@@ -42,18 +41,16 @@ class Mcp300X implements SensorInterface
      * - 8 channels for MCP3008
      * and so on...
      *
-     * @param integer $clockpin      The clock (CLK) pin (ex. 11)
-     * @param integer $mosipin       The Master Out Slave In (MOSI) pin (ex. 10)
-     * @param integer $misopin       The Master In Slave Out (MISO) pin (ex. 9)
-     * @param integer $cspin         The Chip Select (CSna) pin (ex. 8)
-     * @param integer $channelsCount Channels available
-     * @param Gpio    $gpio          Gpio instance
+     * @param GpioInterface $gpio          Gpio instance
+     * @param integer       $clockpin      The clock (CLK) pin (ex. 11)
+     * @param integer       $mosipin       The Master Out Slave In (MOSI) pin (ex. 10)
+     * @param integer       $misopin       The Master In Slave Out (MISO) pin (ex. 9)
+     * @param integer       $cspin         The Chip Select (CSna) pin (ex. 8)
+     * @param integer       $channelsCount Channels available
      */
-    public function __construct($clockpin, $mosipin, $misopin, $cspin, $channelsCount = 2, Gpio $gpio = null)
+    public function __construct(GpioInterface $gpio, $clockpin, $mosipin, $misopin, $cspin, $channelsCount = 2)
     {
-        if (is_null($gpio)) {
-            $this->gpio = new GPIO();
-        }
+        $this->gpio = $gpio;
 
         $this->clockPin = $clockpin;
         $this->mosiPin = $mosipin;

@@ -41,12 +41,8 @@ class Gpio implements GpioInterface
     /**
      * @param Pi|null $raspi
      */
-    public function __construct(Pi $raspi = null)
+    public function __construct(Pi $raspi)
     {
-        if (is_null($raspi)) {
-            $raspi = new Pi();
-        }
-
         if ($raspi->getVersion() < 4) {
             $this->pins = [0, 1, 4, 7, 8, 9, 10, 11, 14, 15, 17, 18, 21, 22, 23, 24, 25];
             $this->hackablePins = [4, 7, 8, 9, 10, 11, 17, 18, 21, 22, 23, 24, 25];

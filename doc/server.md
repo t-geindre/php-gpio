@@ -1,12 +1,12 @@
 # PHP-GPIO Server
 
-Root permission are required to read/write Raspberry PI GPIOs, but running a webserver with the root user is __always__ a bad idea.
+Root permission are required to read/write Raspberry PI GPIOs, but running a webserver with the root permissions is __always__ a bad idea.
 
 That's why this library also provide a simple TCP server wich can be used to access GPIOs.
 
 ## Creating a server
 
-The server is made with the React\Server library, so you'll have to instanciate some React objects to be able to run the GPIOs server.
+The server is made with the [reactphp/socket](https://github.com/reactphp/socket) library, so you'll have to instanciate some reactphp objects to be able to run the GPIOs server.
 
 Here is a simple example:
 
@@ -34,7 +34,7 @@ This example is also available in `doc\examples\simple-server.php`.
 
 Now you can run your simple GPIOs server as root user (or with the `sudo` command):
 
-```shell
+```bash
 # php simple-server.php
 ```
 
@@ -44,7 +44,7 @@ __Remember:__ your server should always be bind on local interface and never bei
 
 Any TCP client can communicate with a running server. For instance, you can use the `telnet` command :
 
-```shell
+```bash
 $ telnet localhost 8090
 ```
 
@@ -63,7 +63,7 @@ Two commands available:
 
 Telnet session example:
 
-```shell
+```bash
 $ telnet localhost 8090
 Trying 127.0.0.1...
 Connected to localhost.

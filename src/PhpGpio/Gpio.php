@@ -50,12 +50,15 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Setup pin, takes pin number and direction (in or out)
-     *
-     * @param int    $pinNo
-     * @param string $direction
-     *
-     * @return mixed  string GPIO value or boolean false
+     * @return array
+     */
+    public function getPins()
+    {
+        return $this->pins;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setup($pinNo, $direction)
     {
@@ -75,11 +78,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Read input value
-     *
-     * @param int $pinNo
-     *
-     * @return string GPIO value or boolean false
+     * {@inheritdoc}
      */
     public function read($pinNo)
     {
@@ -95,12 +94,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Write output value
-     *
-     * @param int    $pinNo
-     * @param string $value
-     *
-     * @return mixed Gpio current instance or boolean false
+     * {@inheritdoc}
      */
     public function write($pinNo, $value)
     {
@@ -120,11 +114,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Unexport Pin
-     *
-     * @param int $pinNo
-     *
-     * @return mixed Gpio current instance or boolean false
+     * {@inheritdoc}
      */
     public function unexport($pinNo)
     {
@@ -138,9 +128,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Unexport all pins
-     *
-     * @return Gpio Gpio current instance or boolean false
+     * {@inheritdoc}
      */
     public function unexportAll()
     {
@@ -154,16 +142,11 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Check if pin is exported
-     *
-     * @param integer $pinNo
-     * @param boolean $exception
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isExported($pinNo, $exception = false)
     {
-        $this->isValidPin($pinNo);
+        $this->isValidPin($pinNo, true);
 
         if (!file_exists(GpioInterface::PATH_GPIO.$pinNo)) {
             if ($exception) {
@@ -187,11 +170,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * get the pin's current direction
-     *
-     * @param integer $pinNo
-     *
-     * @return false|string string pin's direction value or boolean false
+     * {@inheritdoc}
      */
     public function currentDirection($pinNo)
     {
@@ -201,12 +180,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Check for valid direction, in or out
-     *
-     * @param string  $direction
-     * @param boolean $exception Throw exception on invalid direction
-     *
-     * @return boolean true
+     * {@inheritdoc}
      */
     public function isValidDirection($direction, $exception = false)
     {
@@ -230,12 +204,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Check for valid output value
-     *
-     * @param integer $output
-     * @param boolean $exception Throw exception on invalid output
-     *
-     * @return boolean true
+     * {@inheritdoc}
      */
     public function isValidOutput($output, $exception = false)
     {
@@ -259,12 +228,7 @@ class Gpio implements GpioInterface
     }
 
     /**
-     * Check for valid pin value
-     *
-     * @param integer $pinNo
-     * @param boolean $exception Throw exception on invalid pin
-     *
-     * @return boolean true
+     * {@inheritdoc}
      */
     public function isValidPin($pinNo, $exception = false)
     {

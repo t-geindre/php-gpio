@@ -33,7 +33,7 @@ class Pi
      *
      * @return array
      */
-    public function getAvailableGpios()
+    public function getAvailablePins()
     {
         $version = $this->getVersion();
 

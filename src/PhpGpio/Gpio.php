@@ -29,11 +29,6 @@ class Gpio implements GpioInterface
     ];
 
     /**
-     * @var array
-     */
-    protected $exportedPins = [];
-
-    /**
      * @param array $pins
      */
     public function __construct(array $pins)
@@ -72,8 +67,6 @@ class Gpio implements GpioInterface
         $this->filePutContents(GpioInterface::PATH_EXPORT, $pinNo);
         $this->filePutContents(GpioInterface::PATH_GPIO.$pinNo.'/direction', $direction);
 
-        $this->exportedPins[$pinNo] = true;
-
         return $this;
     }
 
@@ -103,7 +96,7 @@ class Gpio implements GpioInterface
 
         if (($dir = $this->currentDirection($pinNo)) != GpioInterface::DIRECTION_OUT) {
             throw new \RuntimeException(
-                sprintf('Wrong direction "%s", "%s" expected', $this->currentDirection($pinNo), GpioInterface::DIRECTION_IN)
+                sprintf('Wrong direction "%s", "%s" expected', $this->currentDirection($pinNo), GpioInterface::DIRECTION_OUT)
             );
         }
 
@@ -118,11 +111,11 @@ class Gpio implements GpioInterface
      */
     public function unexport($pinNo)
     {
-        $this->isExported($pinNo);
+        if ($this->isExported($pinNo)) {
+            $this->filePutContents(GpioInterface::PATH_UNEXPORT, $pinNo);
 
-        $this->filePutContents(GpioInterface::PATH_UNEXPORT, $pinNo);
-
-        $this->exportedPins[$pinNo] = false;
+            $this->exportedPins[$pinNo] = false;
+        }
 
         return $this;
     }
@@ -132,10 +125,8 @@ class Gpio implements GpioInterface
      */
     public function unexportAll()
     {
-        foreach ($this->exportedPins as $pinNo => $exported) {
-            if ($exported) {
-                $this->unexport($pinNo);
-            }
+        foreach ($this->pins as $pinNo) {
+            $this->unexport($pinNo);
         }
 
         return $this;
@@ -151,16 +142,6 @@ class Gpio implements GpioInterface
         if (!file_exists(GpioInterface::PATH_GPIO.$pinNo)) {
             if ($exception) {
                 throw new \RuntimeException(sprintf('Pin "%s" not exported', $pinNo));
-            }
-
-            return false;
-        }
-
-        if (!isset($this->pins[$pinNo]) || !$this->pins[$pinNo]) {
-            if (!exception) {
-                throw new \RuntimeException(
-                    sprintf('Pin "%s" exported but not managed by this instance', $pinNo)
-                );
             }
 
             return false;

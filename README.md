@@ -2,6 +2,8 @@
 
 A simple library to read/write Raspberry PI GPIOs with PHP.
 
+Forked from [ronanguilloux/php-gpio](https://github.com/ronanguilloux/php-gpio) and tested with [Atoum](http://atoum.org/).
+
 ## Read/Write Raspberry Pi GPIOs
 
 To read/write Raspberry Pi GPIOs, use the `PhpGpio\Gpio` class. The instanciation of this class requires an array of pins numbers you will use.

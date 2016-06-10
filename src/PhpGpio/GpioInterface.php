@@ -80,7 +80,7 @@ interface GpioInterface
      *
      * @return string string pin's direction value or boolean false
      */
-    public function currentDirection($pinNo);
+    public function getCurrentDirection($pinNo);
 
     /**
      * Check for valid direction, in or out

@@ -41,6 +41,10 @@ class Gpio implements GpioInterface
             }
         }
 
+        if (empty($pins)) {
+            throw new \InvalidArgumentException('Pins list must, at least, contains one pin');
+        }
+
         $this->pins = $pins;
     }
 
@@ -77,7 +81,7 @@ class Gpio implements GpioInterface
     {
         $this->isExported($pinNo, true);
 
-        if (($dir = $this->currentDirection($pinNo)) != GpioInterface::DIRECTION_IN) {
+        if (($dir = $this->getCurrentDirection($pinNo)) != GpioInterface::DIRECTION_IN) {
             throw new \RuntimeException(
                 sprintf('Wrong direction "%s", "%s" expected', $dir, GpioInterface::DIRECTION_IN)
             );
@@ -94,9 +98,9 @@ class Gpio implements GpioInterface
         $this->isExported($pinNo, true);
         $this->isValidOutput($value, true);
 
-        if (($dir = $this->currentDirection($pinNo)) != GpioInterface::DIRECTION_OUT) {
+        if (($dir = $this->getCurrentDirection($pinNo)) != GpioInterface::DIRECTION_OUT) {
             throw new \RuntimeException(
-                sprintf('Wrong direction "%s", "%s" expected', $this->currentDirection($pinNo), GpioInterface::DIRECTION_OUT)
+                sprintf('Wrong direction "%s", "%s" expected', $this->getCurrentDirection($pinNo), GpioInterface::DIRECTION_OUT)
             );
         }
 
@@ -153,9 +157,9 @@ class Gpio implements GpioInterface
     /**
      * {@inheritdoc}
      */
-    public function currentDirection($pinNo)
+    public function getCurrentDirection($pinNo)
     {
-        $this->isExported($pinNo);
+        $this->isExported($pinNo, true);
 
         return trim($this->fileGetContents(GpioInterface::PATH_GPIO.$pinNo.'/direction'));
     }
@@ -167,7 +171,7 @@ class Gpio implements GpioInterface
     {
         if (!is_string($direction) || empty($direction)) {
             if ($exception) {
-                throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (string expected).', $direction));
+                throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (string expected)', $direction));
             }
 
             return false;
@@ -175,7 +179,7 @@ class Gpio implements GpioInterface
 
         if (!in_array($direction, $this->directions)) {
             if ($exception) {
-                throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (unknown direction).', $direction));
+                throw new \InvalidArgumentException(sprintf('Direction "%s" is invalid (unknown direction)', $direction));
             }
 
             return false;

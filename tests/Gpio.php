@@ -9,6 +9,7 @@ class Gpio extends atoum
 {
     public function testConstruct()
     {
+        $self = $this;
         $this
             ->given(
                 $pins = [1,2,3],
@@ -17,6 +18,16 @@ class Gpio extends atoum
             ->then
                 ->array($this->testedInstance->getPins())
                     ->isEqualTo($pins)
+                ->exception(function() use ($self) {
+                    $self->newTestedInstance([]);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                    ->hasMessage('Pins list must, at least, contains one pin')
+                ->exception(function() use ($self) {
+                    $self->newTestedInstance([1,2,'foo']);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                    ->hasMessage('Pins list can only contains integer, string found')
         ;
     }
 
@@ -223,6 +234,98 @@ class Gpio extends atoum
                     ->isIdenticalTo($this->testedInstance)
                 ->function('file_put_contents')
                     ->wasCalled()->exactly(9)
+        ;
+    }
+
+    public function testIsExported()
+    {
+        $this
+            ->given(
+                $testedInstance = $this->newTestedInstance($pins = [1,2,3]),
+                $this->function->file_exists = false,
+                $invalidPin = -1
+            )
+                ->exception(function() use ($testedInstance, $invalidPin) {
+                    $this->testedInstance->isExported($invalidPin);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                ->exception(function() use ($testedInstance, $pins) {
+                    $testedInstance->isExported($pins[0], true);
+                })
+                    ->isInstanceOf('RuntimeException')
+                ->boolean($this->testedInstance->isExported($pins[0]))
+                    ->isFalse()
+            ->then(
+                $this->function->file_exists = true
+            )
+                ->boolean($this->testedInstance->isExported($pins[0]))
+                    ->isTrue()
+        ;
+    }
+
+    public function testGetCurrentDirection()
+    {
+        $this
+            ->given(
+                $testedInstance = $this->newTestedInstance($pins = [1,2,3]),
+                $this->function->file_exists = false,
+                $this->function->file_get_contents = false,
+                $invalidPin = -1
+            )
+                ->exception(function() use ($testedInstance, $invalidPin) {
+                    $testedInstance->getCurrentDirection($invalidPin);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                ->exception(function() use ($testedInstance, $pins) {
+                    $testedInstance->getCurrentDirection($pins[0]);
+                })
+                    ->isInstanceOf('RuntimeException')
+            ->then(
+                $this->function->file_exists = true
+            )
+                ->exception(function() use ($testedInstance, $pins) {
+                    $testedInstance->getCurrentDirection($pins[0]);
+                })
+                    ->isInstanceOf('PhpGpio\IOException')
+            ->then(
+                $this->function->file_get_contents = GpioInterface::DIRECTION_OUT . ' '
+            )
+                ->string($testedInstance->getCurrentDirection($pins[0]))
+                    ->isEqualTo(GpioInterface::DIRECTION_OUT)
+        ;
+    }
+
+    public function testIsValidDirection()
+    {
+        $this
+            ->given(
+                $testedInstance = $this->newTestedInstance([1,2,3])
+            )
+                ->exception(function() use ($testedInstance) {
+                    $testedInstance->isValidDirection(1, true);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                    ->hasMessage('Direction "1" is invalid (string expected)')
+                ->boolean($this->testedInstance->isValidDirection(1))
+                    ->isFalse()
+                ->exception(function() use ($testedInstance) {
+                    $testedInstance->isValidDirection('', true);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                    ->hasMessage('Direction "" is invalid (string expected)')
+                ->boolean($this->testedInstance->isValidDirection(''))
+                    ->isFalse()
+                ->exception(function() use ($testedInstance) {
+                    $testedInstance->isValidDirection('foo', true);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                    ->hasMessage('Direction "foo" is invalid (unknown direction)')
+                ->boolean($this->testedInstance->isValidDirection('foo'))
+                    ->isFalse()
+                ->boolean($this->testedInstance->isValidDirection(GpioInterface::DIRECTION_OUT))
+                    ->isTrue()
+                ->boolean($this->testedInstance->isValidDirection(GpioInterface::DIRECTION_IN))
+                    ->isTrue()
         ;
     }
 }

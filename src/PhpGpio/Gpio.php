@@ -219,7 +219,7 @@ class Gpio implements GpioInterface
     {
         if (!is_int($pinNo)) {
             if ($exception) {
-                throw new \InvalidArgumentException(sprintf('Pin number "%s" is invalid (integer expected).', $pinNo));
+                throw new \InvalidArgumentException(sprintf('Pin number "%s" is invalid (integer expected)', $pinNo));
             }
 
             return false;
@@ -227,7 +227,7 @@ class Gpio implements GpioInterface
 
         if (!in_array($pinNo, $this->pins)) {
             if ($exception) {
-                throw new \InvalidArgumentException(sprintf('Pin number "%s" is invalid (out of exepected range).', $pinNo));
+                throw new \InvalidArgumentException(sprintf('Pin number "%s" is invalid (out of exepected range)', $pinNo));
             }
 
             return false;

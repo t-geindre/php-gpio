@@ -328,4 +328,31 @@ class Gpio extends atoum
                     ->isTrue()
         ;
     }
+
+    public function testIsValidPin()
+    {
+        $this
+            ->given(
+                $testedInstance = $this->newTestedInstance($pins = [1,2,3])
+            )
+                ->exception(function() use ($testedInstance) {
+                    $testedInstance->isValidPin(0, true);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                    ->hasMessage('Pin number "0" is invalid (out of exepected range)')
+                ->exception(function() use ($testedInstance) {
+                    $testedInstance->isValidPin('string', true);
+                })
+                    ->isInstanceOf('InvalidArgumentException')
+                    ->hasMessage('Pin number "string" is invalid (integer expected)')
+                ->boolean($testedInstance->isValidPin(0))
+                    ->isFalse()
+                ->boolean($testedInstance->isValidPin('string'))
+                    ->isFalse()
+                ->boolean($testedInstance->isValidPin($pins[0], true))
+                    ->isTrue()
+                ->boolean($testedInstance->isValidPin($pins[0], false))
+                    ->isTrue()
+        ;
+    }
 }

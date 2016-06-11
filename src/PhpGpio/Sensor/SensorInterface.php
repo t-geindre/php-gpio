@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpGpio\Sensors;
+namespace PhpGpio\Sensor;
 
 /**
  * Interface implemented by sensors classes.

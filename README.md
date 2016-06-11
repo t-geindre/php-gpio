@@ -63,4 +63,4 @@ Check [this page](http://www.raspberrypi-spy.co.uk/2012/06/simple-guide-to-the-r
 
 Here is a simple demo using a Raspberry Pi 3 and some LED (click on the image to see the video):
 
-[![Demmo video](https://img.youtube.com/vi/tpwLCdnsoO8/0.jpg)](https://www.youtube.com/watch?v=tpwLCdnsoO8)
+[![Demmo video](https://img.youtube.com/vi/tpwLCdnsoO8/1.jpg)](https://www.youtube.com/watch?v=tpwLCdnsoO8)

@@ -20,20 +20,12 @@ interface GpioInterface
     const PATH_UNEXPORT = '/sys/class/gpio/unexport';
 
     /**
-     * getHackablePins : the pins you can hack with.
-     * @link http://elinux.org/RPi_Low-level_peripherals
-     *
-     * @return array
-     */
-    public function getHackablePins();
-
-    /**
      * Setup pin, takes pin number and direction (in or out)
      *
      * @param int    $pinNo
      * @param string $direction
      *
-     * @return GpioDevelop string GPIO value or boolean false
+     * @return GpioInterface
      */
     public function setup($pinNo, $direction);
 
@@ -42,9 +34,9 @@ interface GpioInterface
      *
      * @param int $pinNo
      *
-     * @return integer string GPIO value or boolean false
+     * @return string GPIO value or boolean false
      */
-    public function input($pinNo);
+    public function read($pinNo);
 
     /**
      * Set output value
@@ -52,23 +44,23 @@ interface GpioInterface
      * @param int    $pinNo
      * @param string $value
      *
-     * @return GpioDevelop Gpio current instance or boolean false
+     * @return GpioInterface
      */
-    public function output($pinNo, $value);
+    public function write($pinNo, $value);
 
     /**
      * Unexport Pin
      *
      * @param int $pinNo
      *
-     * @return GpioDevelop Gpio current instance or boolean false
+     * @return GpioInterface
      */
     public function unexport($pinNo);
 
     /**
      * Unexport all pins
      *
-     * @return GpioDevelop Gpio current instance or boolean false
+     * @return GpioInterface
      */
     public function unexportAll();
 
@@ -88,7 +80,7 @@ interface GpioInterface
      *
      * @return string string pin's direction value or boolean false
      */
-    public function currentDirection($pinNo);
+    public function getCurrentDirection($pinNo);
 
     /**
      * Check for valid direction, in or out

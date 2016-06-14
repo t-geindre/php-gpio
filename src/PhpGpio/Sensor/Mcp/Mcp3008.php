@@ -14,23 +14,6 @@ class Mcp3008 extends AbstractMcp
      */
     protected $channelsCount = 8;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function read(array $args = [])
-    {
-        if (isset($channel['diff']) && !is_bool($channel['diff'])) {
-            throw new \InvalidArgumentException(sprintf(
-                'Invalid "diff" value, got "%s", boolean expected',
-                gettype($args['diff'])
-            ));
-        } else {
-            $args['diff'] = false;
-        }
-
-        return parent::read($args);
-    }
-
     protected function getChannelCode(array $args)
     {
         $code = [$args['diff'] ? 0 : 1];

@@ -27,6 +27,15 @@ abstract class AbstractMcp extends AbstractSpi
             );
         }
 
+        if (isset($channel['diff']) && !is_bool($channel['diff'])) {
+            throw new \InvalidArgumentException(sprintf(
+                'Invalid "diff" value, got "%s", boolean expected',
+                gettype($args['diff'])
+            ));
+        } else {
+            $args['diff'] = false;
+        }
+
         $this->initCom();
         $this->selectChannel($args);
 

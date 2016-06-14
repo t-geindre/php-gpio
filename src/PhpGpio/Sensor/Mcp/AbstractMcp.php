@@ -2,65 +2,18 @@
 
 namespace PhpGpio\Sensor\Mcp;
 
+use PhpGpio\Sensor\AbstractSpi;
 use PhpGpio\GpioInterface;
-use PhpGpio\Sensor\SensorInterface;
 
 /**
  * Common code to cummunication with MCP ADC
  */
-abstract class AbstractMcp implements SensorInterface
+abstract class AbstractMcp extends AbstractSpi
 {
     /**
      * @var integer
      */
-    protected $clockPin;
-
-    /**
-     * @var integer
-     */
-    protected $mosiPin;
-
-    /**
-     * @var integer
-     */
-    protected $misoPin;
-
-    /**
-     * @var integer
-     */
-    protected $csPin;
-
-    /**
-     * @var Gpio
-     */
-    protected $gpio;
-
-    /**
-     * @var integer
-     */
     protected $channelsCount;
-
-    /**
-     * @param GpioInterface $gpio     Gpio instance
-     * @param integer       $clockpin The clock (CLK) pin (ex. 11)
-     * @param integer       $mosipin  The Master Out Slave In (MOSI) pin (ex. 10)
-     * @param integer       $misopin  The Master In Slave Out (MISO) pin (ex. 9)
-     * @param integer       $cspin    The Chip Select (CSna) pin (ex. 8)
-     */
-    public function __construct(GpioInterface $gpio, $clockpin, $mosipin, $misopin, $cspin)
-    {
-        $this->gpio = $gpio;
-
-        $this->clockPin = $clockpin;
-        $this->mosiPin = $mosipin;
-        $this->misoPin = $misopin;
-        $this->csPin = $cspin;
-
-        $this->gpio->setup($this->mosiPin, GpioInterface::DIRECTION_OUT);
-        $this->gpio->setup($this->misoPin, GpioInterface::DIRECTION_IN);
-        $this->gpio->setup($this->clockPin, GpioInterface::DIRECTION_OUT);
-        $this->gpio->setup($this->csPin, GpioInterface::DIRECTION_OUT);
-    }
 
     /**
      * {@inheritdoc}
@@ -88,13 +41,6 @@ abstract class AbstractMcp implements SensorInterface
         throw new \RuntimeException('Component not writable');
     }
 
-    protected function initCom()
-    {
-        $this->gpio->write($this->csPin, GpioInterface::IO_VALUE_ON);
-        $this->gpio->write($this->clockPin, GpioInterface::IO_VALUE_OFF);
-        $this->gpio->write($this->csPin, GpioInterface::IO_VALUE_OFF);
-    }
-
     protected function selectChannel($args)
     {
         $channelCode = $this->getChannelCode($args);
@@ -104,8 +50,7 @@ abstract class AbstractMcp implements SensorInterface
                 $this->mosiPin,
                 $code ? GpioInterface::IO_VALUE_ON : GpioInterface::IO_VALUE_OFF
             );
-            $this->gpio->write($this->clockPin, GpioInterface::IO_VALUE_ON);
-            $this->gpio->write($this->clockPin, GpioInterface::IO_VALUE_OFF);
+            $this->tick();
         }
     }
 
@@ -114,8 +59,7 @@ abstract class AbstractMcp implements SensorInterface
         $adcout = 0;
         //  read in one empty bit, one null bit and 10 ADC bits
         for ($i = 0; $i < 12; $i++) {
-            $this->gpio->write($this->clockPin, GpioInterface::IO_VALUE_ON);
-            $this->gpio->write($this->clockPin, GpioInterface::IO_VALUE_OFF);
+            $this->tick();
             $adcout <<= 1;
             if ($this->gpio->read($this->misoPin)) {
                 $adcout |= 0x1;

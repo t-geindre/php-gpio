@@ -8,7 +8,7 @@ use PhpGpio\GpioInterface;
  */
 abstract class AbstractSpi implements SensorInterface
 {
-	/**
+    /**
      * @var integer
      */
     protected $clockPin;
